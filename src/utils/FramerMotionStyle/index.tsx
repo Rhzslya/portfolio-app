@@ -92,3 +92,8 @@ export const itemVariants = {
   hidden: { opacity: 0, scale: 0.8, y: 20 },
   visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.6 } },
 };
+
+export const shellVariants = {
+  hidden: { opacity: 0, y: -20 }, // Awal: tidak terlihat dan sedikit ke atas
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }, // Muncul dengan smooth transition
+};

@@ -3,7 +3,9 @@
 import ExperienceBox from "@/components/ExperienceBox";
 import { GlowingEffectDemo } from "@/components/GlowingEffect";
 import ImageStack from "@/components/ImageStack";
+import MiniTerminal from "@/components/MiniTerminal";
 import ScrollMouse from "@/components/ScrollMouse";
+import TerminalWithApi from "@/components/TerminalWithApi";
 import {
   backgroundVariants,
   buttonVariants,
@@ -69,6 +71,7 @@ export default function Home() {
           </motion.button>
         </motion.div>
       </div>
+      <TerminalWithApi />
       <ImageStack />
       <ExperienceBox />
       <ScrollMouse />
