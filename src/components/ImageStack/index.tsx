@@ -7,14 +7,14 @@ import {
 
 const ImageStack = () => {
   return (
-    <div className="image-stack row-span-2 col-start-4 relative my-auto overflow-hidden">
+    <div className="image-stack xl:row-span-2 lg:col-start-1 lg:row-span-2 row-start-4 xl:col-start-4 xl:row-start-1 relative my-6 lg:my-auto overflow-hidden  xl:flex">
       <motion.div
         className="absolute inset-0 bg-grid-white/[0.2] [mask-image:radial-gradient(ellipse_at_center,black_10%,transparent_75%)] pointer-events-none"
         variants={backgroundVariants}
         initial="hidden"
         animate="visible"
       ></motion.div>
-      <div className="grid grid-cols-10 grid-rows-10 gap-3">
+      <div className="grid grid-cols-10 xl:grid-rows-10 gap-3 max-w-[400px] lg:w-full mx-auto">
         <motion.div
           className="col-span-2 row-span-2 group"
           variants={imageStackAnimate(100, 100, 1)}

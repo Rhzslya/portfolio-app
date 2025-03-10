@@ -49,13 +49,13 @@ export default function ExperienceBox() {
 
   return (
     <motion.section
-      className="col-span-2 col-start-2 row-start-3 mb-auto"
+      className="lg:col-span-2 lg:col-start-2 row-start-3 lg:row-start-4 xl:col-start-2 xl:row-start-3 xl:mb-auto max-xl:m-auto"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
     >
-      <motion.div className="container mx-auto">
-        <motion.div className="flex flex-wrap justify-center gap-4 mx-auto">
+      <motion.div className="container">
+        <motion.div className="flex xl:flex-nowrap flex-wrap justify-center gap-4 mx-auto">
           {stats.map((item, index) => (
             <motion.div
               key={index}
@@ -66,12 +66,12 @@ export default function ExperienceBox() {
                 end={item.num}
                 duration={5}
                 delay={0.8}
-                className="text-4xl xl:text-6xl font-bold"
+                className="text-5xl 2xl:text-6xl font-bold"
               />
               <p
                 className={`${
                   item.text.length < 15 ? "max-w-[100px]" : "max-w-[120px]"
-                }`}
+                } max-[662px]:text-center`}
               >
                 {item.text}
               </p>

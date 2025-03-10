@@ -189,27 +189,19 @@ export default function TerminalWithApi() {
     audio.play();
   };
 
-  const cancelCommand = () => {
-    setIsAddingCommand(false);
-    setWaitingForOutput(false);
-    setFullOutput("Command creation canceled.");
-    setDisplayedOutput("");
-    setTypingIndex(0);
-  };
-
   return (
     <motion.section
       variants={shellVariants}
       initial="hidden"
       animate="visible"
       whileHover={{ scale: 1.02 }} // Efek sedikit membesar saat di-hover
-      className="col-start-1 row-start-2"
+      className="lg:col-start-1 row-start-5 lg:row-start-2 lg:row-span-2 xl:row-span-1"
     >
-      <div className="p-4 border h-full border-green-500 bg-black text-green-400 font-mono rounded-md">
-        <h3 className="text-center text-xl text-amber-500 font-press-start-2p">
+      <div className="p-4 border max-w-[400px] lg:max-w-[300px] mx-auto xl:max-w-[300px] xl:w-full lg:max-h-[300px] h-full border-green-500 bg-black text-green-400 font-mono rounded-md text-base lg:text-base">
+        <h3 className="text-center text-xl max-[350px]:text-xl min-[350px]:text-2xl lg:text-xl mb-2 text-amber-500 font-press-start-2p">
           8-Bit Shell
         </h3>
-        <p>
+        <p className="my-2 max-[350px]:text-sm">
           {isAddingCommand
             ? "Command creation mode active! Type your command."
             : 'Need help? Type "help" to see available commands.'}
@@ -225,13 +217,15 @@ export default function TerminalWithApi() {
               playTypingSound(); // Tambahkan suara saat mengetik
             }}
             onKeyDown={(e) => e.key === "Enter" && handleCommand()}
-            className="bg-transparent border-2 border-green-500 outline-none text-green-300 font-press-start-2p px-2 py-1 ml-2 w-full"
+            className="bg-transparent border-2 border-green-500 outline-none text-green-300 font-press-start-2p px-2 py-1 ml-2 w-full text-sm lg:text-base"
             autoFocus
           />
         </div>
 
         {isLoading && <p className="text-yellow-500">Processing...</p>}
-        {displayedOutput && !isLoading && <p>{displayedOutput}</p>}
+        {displayedOutput && !isLoading && (
+          <p className="my-2">{displayedOutput}</p>
+        )}
         {/* {isAddingCommand && (
           <button
             onClick={cancelCommand}

@@ -5,6 +5,10 @@
 @tailwind components;
 @tailwind utilities;
 
+@theme {
+  --breakpoint-xs: 30rem;
+}
+
 :root {
   --background-main: #070606;
   --foreground: #776b6b;
@@ -25,4 +29,30 @@
 
 .animate-running-dot {
   animation: running-dot 4s linear infinite;
+}
+
+.container-marque {
+  display: flex;
+  flex-shrink: 0;
+  flex-grow: 0;
+  flex-basis: auto;
+  overflow-x: hidden;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.marquee {
+  display: flex;
+  flex-shrink: 0;
+  flex-grow: 0;
+  flex-basis: auto;
+  min-width: min-content;
+}
+
+.first-marquee {
+  display: flex;
+  flex-shrink: 0;
+  flex-grow: 0;
+  flex-basis: auto;
+  min-width: min-content;
 }

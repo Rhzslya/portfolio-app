@@ -60,7 +60,7 @@ const GridItem = ({}: GridItemProps) => {
 
   return (
     <motion.div
-      className="relative m-auto p-2 rounded-full"
+      className="relative ml-auto lg:m-auto p-2 rounded-full"
       initial="hidden"
       animate="visible"
       variants={popIn(0.2)}
