@@ -76,7 +76,7 @@ export const InfiniteMovingCards = ({
       )}
     >
       <motion.div
-        className="absolute h-full inset-0 bg-dot-white/[0.2] [mask-image:radial-gradient(ellipse_at_center,black_10%,transparent_80%)] pointer-events-none"
+        className="absolute h-full inset-0 bg-dot-white/[0.8] [mask-image:radial-gradient(ellipse_at_center,black_10%,transparent_80%)] pointer-events-none"
         variants={backgroundVariants}
         initial="hidden"
         animate="visible"
