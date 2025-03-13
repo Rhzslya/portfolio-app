@@ -4,10 +4,11 @@ import { fadeIn } from "@/utils/FramerMotionStyle";
 import { ScrollingTechStack } from "../InfiniteMovingCards";
 import { ColourfulText } from "../ui/colorful-text";
 import { BentoProject } from "../BentoProject";
+import WordCloudComponent from "../TechStackChart";
 
 const Project = () => {
   return (
-    <div className="grid grid-cols-1  gap-4 grid-rows-[auto_1fr_1fr]">
+    <div className="grid grid-cols-1  gap-4 grid-rows-[auto_1fr_auto]">
       <div className="stack-container">
         <motion.h1
           className="text-gray-200 font-bold text-center relative z-10 text-nowrap"
@@ -24,7 +25,7 @@ const Project = () => {
       <div>
         <BentoProject />
       </div>
-      <div>2</div>
+      <div className="flex justify-center">{/* <WordCloudComponent /> */}</div>
     </div>
   );
 };

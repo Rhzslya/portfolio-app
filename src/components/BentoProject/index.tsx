@@ -1,57 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
 import { BentoGrid, BentoGridItem } from "../ui/bento-grid";
+import Image from "next/image";
+import { items } from "@/utils/ProjectList";
 
 export function BentoProject() {
+  const [visibleItems, setVisibleItems] = useState(5);
+
+  const handleLoadMore = () => {
+    setVisibleItems((prev) => prev + 5);
+  };
   return (
-    <BentoGrid className="max-w-7xl mx-auto">
-      {items.map((item, i) => (
-        <BentoGridItem
-          key={i}
-          title={item.title}
-          description={item.description}
-          header={item.header}
-          link={item.link}
-          className={i === 3 || i === 6 ? "md:col-span-2" : ""}
-        />
-      ))}
-    </BentoGrid>
+    <div className="max-w-7xl mx-auto">
+      <BentoGrid>
+        {items.slice(0, visibleItems).map((item, i) => (
+          <BentoGridItem
+            key={i}
+            title={item.title}
+            description={item.description}
+            stack={item.stack}
+            header={
+              <div className="relative w-full h-full rounded-xl overflow-hidden">
+                <Image
+                  src={`/project/${item.image}.png`}
+                  alt={item.title}
+                  layout="fill"
+                  objectFit="cover"
+                  className="rounded-xl group-hover:scale-105 duration-300"
+                  priority={i === 0}
+                />
+              </div>
+            }
+            link={item.link}
+            className={i === 3 || i === 6 ? "md:col-span-2" : ""}
+          />
+        ))}
+      </BentoGrid>
+
+      {visibleItems < items.length && (
+        <div className="flex justify-center mt-6">
+          <button
+            onClick={handleLoadMore}
+            className="px-6 py-2 bg-amber-600 font-semibold text-white rounded-md hover:text-black transition duration-300"
+          >
+            Load More
+          </button>
+        </div>
+      )}
+    </div>
   );
 }
-const Skeleton = () => (
-  <div className="flex flex-1 w-full h-full min-h-[8rem] rounded-xl bg-sky-50 dark:from-neutral-900 dark:to-neutral-800 to-neutral-100">
-    <span>Project Image</span>
-  </div>
-);
-const items = [
-  {
-    title: "Flugel Bot Whatsapp",
-    description: "Explore the birth of groundbreaking ideas and inventions.",
-    header: <Skeleton />,
-    link: "www.facebook.com",
-  },
-  {
-    title: "NKS Gift",
-    description: "Dive into the transformative power of technology.",
-    header: <Skeleton />,
-    link: "www.google.com",
-  },
-  {
-    title: "Restaurant Management",
-    description: "Discover the beauty of thoughtful and functional design.",
-    header: <Skeleton />,
-    link: "www.google.com",
-  },
-  {
-    title: "Portfolio App",
-    description:
-      "Understand the impact of effective communication in our lives.",
-    header: <Skeleton />,
-    link: "www.google.com",
-  },
-  {
-    title: "Flugelnime",
-    description: "Join the quest for understanding and enlightenment.",
-    header: <Skeleton />,
-    link: "www.google.com",
-  },
-];

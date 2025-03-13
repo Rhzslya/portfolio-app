@@ -1,5 +1,6 @@
 "use client";
 
+// Cek apakah items terdefinisi
 import React from "react";
 import { InfiniteMovingCards } from "../ui/scrolling-tech-stack";
 export function ScrollingTechStack() {
