@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import CountUp from "react-countup";
 import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "@/utils/FramerMotionStyle";
+import { SparklesCore } from "../ui/sparkles";
 interface GitHubRepo {
   defaultBranchRef?: {
     target?: {
@@ -78,6 +79,14 @@ export default function ExperienceBox() {
             </motion.div>
           ))}
         </motion.div>
+        <SparklesCore
+          background="transparent"
+          minSize={0.4}
+          maxSize={1}
+          particleDensity={190}
+          className="w-full h-full"
+          particleColor="#FFFFFF"
+        />
       </motion.div>
     </motion.section>
   );

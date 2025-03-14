@@ -222,7 +222,7 @@ export default function TerminalWithApi() {
           />
         </div>
 
-        {isLoading && <p className="text-yellow-500">Processing...</p>}
+        {isLoading && <p className="text-yellow-500 my-2">Processing...</p>}
         {displayedOutput && !isLoading && (
           <p className="my-2">{displayedOutput}</p>
         )}
