@@ -1,83 +1,128 @@
 "use client";
-import { useScroll, useTransform, motion } from "motion/react";
-import React, { useEffect, useRef, useState } from "react";
+import { formatName } from "@/utils/Capitalize";
+import { useScroll, useTransform, motion } from "framer-motion";
+import React, { useRef, useState, useLayoutEffect } from "react";
+
+interface TimelineItem {
+  name: string;
+  description: string;
+  url: string;
+  createdAt: string;
+  updatedAt: string;
+  commits: number;
+}
 
 interface TimelineEntry {
   title: string;
-  content: React.ReactNode;
+  items: TimelineItem[];
 }
 
 export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
-  const ref = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [height, setHeight] = useState(0);
+  const lineRef = useRef<HTMLDivElement>(null);
+  const [lineHeight, setLineHeight] = useState(0);
 
-  useEffect(() => {
-    if (ref.current) {
-      const rect = ref.current.getBoundingClientRect();
-      setHeight(rect.height);
-    }
-  }, [ref]);
+  useLayoutEffect(() => {
+    const updateHeight = () => {
+      if (lineRef.current) {
+        setLineHeight(lineRef.current.getBoundingClientRect().height);
+      }
+    };
+    updateHeight();
+
+    window.addEventListener("resize", updateHeight);
+    return () => window.removeEventListener("resize", updateHeight);
+  }, [data]);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start 10%", "end 50%"],
+    offset: ["start 10%", "end 100%"],
   });
 
-  const heightTransform = useTransform(scrollYProgress, [0, 1], [0, height]);
+  const heightTransform = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [0, lineHeight]
+  );
   const opacityTransform = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
+
+  // Fungsi untuk mengelompokkan data berdasarkan tahun dan bulan
+  const groupedData = data.reduce((acc, entry) => {
+    entry.items.forEach((item) => {
+      const date = new Date(item.updatedAt);
+      const year = date.getFullYear();
+      const month = date.toLocaleString("en-US", { month: "long" });
+
+      if (!acc[year]) acc[year] = {};
+      if (!acc[year][month]) acc[year][month] = [];
+      acc[year][month].push(item);
+    });
+
+    return acc;
+  }, {} as Record<number, Record<string, TimelineItem[]>>);
+
+  const monthOrder = (month: string) => new Date(`${month} 1, 2000`).getMonth();
 
   return (
     <div
-      className="w-full background-main font-sans md:px-10"
+      className="w-full font-sans px-6 md:px-10 py-10 background-main"
       ref={containerRef}
     >
-      <div className="max-w-7xl mx-auto py-20 px-4 md:px-8 lg:px-10">
-        <h2 className="text-lg md:text-4xl mb-4 text-gray-500 max-w-4xl">
-          Changelog from my journey
+      <div className="max-w-7xl mx-auto">
+        <h2 className="text-2xl md:text-4xl font-semibold text-gray-700 dark:text-gray-300 mb-6">
+          My Development Timeline
         </h2>
-        <p className="text-neutral-700 dark:text-neutral-300 text-sm md:text-base max-w-sm">
-          I&apos;ve been working on Aceternity for the past 2 years. Here&apos;s
-          a timeline of my journey.
+        <p className="text-gray-600 dark:text-gray-400 text-base md:text-lg mb-10">
+          A chronological record of my progress and milestones.
         </p>
-      </div>
 
-      <div ref={ref} className="relative max-w-7xl mx-auto pb-20">
-        {data.map((item, index) => (
+        <div className="relative pl-6 md:pl-12">
           <div
-            key={index}
-            className="flex justify-start pt-10 md:pt-40 md:gap-10"
+            ref={lineRef}
+            className="absolute left-3 md:left-6 w-[2px] bg-gray-300 dark:bg-gray-700 h-full"
           >
-            <div className="sticky flex flex-col md:flex-row z-40 items-center top-40 self-start max-w-xs lg:max-w-sm md:w-full">
-              <div className="h-10 absolute left-3 md:left-3 w-10 rounded-full bg-white dark:bg-black flex items-center justify-center">
-                <div className="h-4 w-4 rounded-full bg-neutral-200 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 p-2" />
-              </div>
-              <h3 className="hidden md:block text-xl md:pl-20 md:text-5xl font-bold text-neutral-500 dark:text-neutral-500 ">
-                {item.title}
-              </h3>
-            </div>
-
-            <div className="relative pl-20 pr-4 md:pl-4 w-full">
-              <h3 className="md:hidden block text-2xl mb-4 text-left font-bold text-neutral-500 dark:text-neutral-500">
-                {item.title}
-              </h3>
-              {item.content}{" "}
-            </div>
+            <motion.div
+              style={{ height: heightTransform, opacity: opacityTransform }}
+              className="absolute inset-x-0 top-0 w-[2px] bg-gradient-to-b from-purple-500 via-blue-500 to-transparent"
+            />
           </div>
-        ))}
-        <div
-          style={{
-            height: height + "px",
-          }}
-          className="absolute md:left-8 left-8 top-0 overflow-hidden w-[2px] bg-[linear-gradient(to_bottom,var(--tw-gradient-stops))] from-transparent from-[0%] via-neutral-200 dark:via-neutral-700 to-transparent to-[99%]  [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)] "
-        >
-          <motion.div
-            style={{
-              height: heightTransform,
-              opacity: opacityTransform,
-            }}
-            className="absolute inset-x-0 top-0  w-[2px] bg-gradient-to-t from-purple-500 via-blue-500 to-transparent from-[0%] via-[10%] rounded-full"
-          />
+          {Object.entries(groupedData)
+            .sort(([yearA], [yearB]) => Number(yearB) - Number(yearA)) // Urutkan tahun dari terbaru ke lama
+            .map(([year, months]) => (
+              <div key={year} className="mb-10 flex relative">
+                <h2 className="text-5xl font-bold text-gray-300">{year}</h2>
+                <div className="absolute -left-[31px] top-[15px] w-4 h-4 bg-amber-500 rounded-full border-4 border-white" />
+                <div className="w-full">
+                  {Object.entries(months)
+                    .sort(
+                      ([monthA], [monthB]) =>
+                        monthOrder(monthB) - monthOrder(monthA)
+                    ) // Urutkan bulan dari terbaru ke lama
+                    .map(([month, items]) => (
+                      <div key={month} className="mb-6 relative w-full">
+                        <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-5 md:p-6 ml-6 md:ml-12">
+                          <h3 className="text-lg md:text-xl font-semibold text-gray-800 dark:text-white">
+                            {month}
+                          </h3>
+                          <ul className="mt-2 text-gray-600 dark:text-gray-300 text-sm md:text-base">
+                            {items.map((item, i) => (
+                              <li key={i} className="mt-1">
+                                <span className="font-medium">
+                                  {formatName(item.name)}
+                                </span>
+                                <span>{item.description}</span>
+                                <span>{item.url}</span>
+                                <span>{item.updatedAt}</span>
+                                <span>{item.commits}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    ))}
+                </div>
+              </div>
+            ))}
         </div>
       </div>
     </div>

@@ -6,14 +6,27 @@ import ImageStack from "../ImageStack";
 import ExperienceBox from "../ExperienceBox";
 import ScrollMouse from "../ScrollMouse";
 
-const HeroPage = () => {
+const HeroPage = ({
+  setRepoData,
+}: {
+  setRepoData: (
+    repos: {
+      name: string;
+      createdAt: string;
+      description: string;
+      url: string;
+      updatedAt: string;
+      commits: number;
+    }[]
+  ) => void;
+}) => {
   return (
     <main className="min-h-screen home_root relative grid grid-cols-1 lg:grid-cols-[1fr_2fr] xl:grid-cols-4  grid-rows-[0.25fr_1.5fr_0.5fr_1.5fr_1.3fr_0.25fr] lg:grid-rows-[0.5fr_1fr_0.5fr_1fr] xl:grid-rows-[1fr_1fr_0.7fr] gap-4">
       <GlowingEffectDemo />
       <Hero />
       <TerminalWithApi />
       <ImageStack />
-      <ExperienceBox />
+      <ExperienceBox setRepoData={setRepoData} />
       <ScrollMouse />
     </main>
   );

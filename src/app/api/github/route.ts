@@ -10,24 +10,48 @@ export async function GET() {
   }
 
   const query = `
-    query {
-      user(login: "Rhzslya") {
-        repositories(first: 100) {
-          totalCount
+query {
+  user(login: "Rhzslya") {
+    repositories(first: 100) {
+      totalCount
+      nodes {
+        name
+        createdAt
+        updatedAt
+        description
+        url
+        visibility
+        primaryLanguage {
+          name
+        }
+        repositoryTopics(first: 5) {
           nodes {
-            defaultBranchRef {
-              target {
-                ... on Commit {
-                  history {
-                    totalCount
-                  }
-                }
+            topic {
+              name
+            }
+          }
+        }
+        stargazers {
+          totalCount
+        }
+        forkCount
+        issues(states: OPEN) {
+          totalCount
+        }
+        defaultBranchRef {
+          target {
+            ... on Commit {
+              history {
+                totalCount
               }
             }
           }
         }
       }
     }
+  }
+}
+
   `;
 
   try {

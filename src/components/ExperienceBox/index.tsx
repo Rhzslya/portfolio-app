@@ -4,6 +4,12 @@ import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "@/utils/FramerMotionStyle";
 import { SparklesCore } from "../ui/sparkles";
 interface GitHubRepo {
+  name: string;
+  createdAt: string;
+  description: string;
+  url: string;
+  updatedAt: string;
+  commits: number;
   defaultBranchRef?: {
     target?: {
       history?: {
@@ -14,7 +20,20 @@ interface GitHubRepo {
 }
 const startYear = 2023;
 
-export default function ExperienceBox() {
+export default function ExperienceBox({
+  setRepoData,
+}: {
+  setRepoData: (
+    repos: {
+      name: string;
+      createdAt: string;
+      description: string;
+      url: string;
+      updatedAt: string;
+      commits: number;
+    }[]
+  ) => void;
+}) {
   const [totalRepos, setTotalRepos] = useState<number>(0);
   const [totalCommits, setTotalCommits] = useState<number>(0);
 
@@ -34,6 +53,18 @@ export default function ExperienceBox() {
           0
         );
         setTotalCommits(commitCount);
+
+        // Ambil nama & tanggal repo
+        const repos = data.repositories.nodes.map((repo: GitHubRepo) => ({
+          name: repo.name,
+          createdAt: repo.createdAt,
+          description: repo.description,
+          url: repo.url,
+          updatedAt: repo.updatedAt,
+          commits: repo.defaultBranchRef?.target?.history?.totalCount,
+        }));
+
+        setRepoData(repos);
       } catch (error) {
         console.error("Error fetching GitHub data:", error);
       }

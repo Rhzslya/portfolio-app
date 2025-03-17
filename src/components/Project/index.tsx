@@ -6,7 +6,16 @@ import { ColourfulText } from "../ui/colorful-text";
 import { BentoProject } from "../BentoProject";
 import { Timeline } from "../Timeline";
 
-const Project = () => {
+interface Repo {
+  name: string;
+  description: string;
+  url: string;
+  createdAt: string;
+  updatedAt: string;
+  commits: number;
+}
+
+const Project = ({ repoData }: { repoData: Repo[] }) => {
   return (
     <div className="grid grid-cols-1  gap-8 grid-rows-[auto_1fr_auto]">
       <div className="stack-project-container">
@@ -24,7 +33,7 @@ const Project = () => {
       </div>
 
       <div className="flex justify-center">
-        <Timeline />
+        <Timeline repoData={repoData} />
       </div>
     </div>
   );
