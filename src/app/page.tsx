@@ -13,10 +13,11 @@ export default function Main() {
       url: string;
       updatedAt: string;
       commits: number;
+      hashCommits?: string;
+      message?: string;
     }[]
   >([]);
 
-  console.log(repoData);
   return (
     <div className="my-[56px] px-10 lg:px-14 pt-14">
       <HeroPage setRepoData={setRepoData} />

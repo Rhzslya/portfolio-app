@@ -8,6 +8,8 @@ interface TimelineItem {
   createdAt: string;
   updatedAt: string;
   commits: number;
+  hashCommits?: string;
+  message?: string;
 }
 
 interface TimelineEntry {

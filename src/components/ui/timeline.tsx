@@ -2,6 +2,7 @@
 import { formatName } from "@/utils/Capitalize";
 import { useScroll, useTransform, motion } from "framer-motion";
 import React, { useRef, useState, useLayoutEffect } from "react";
+import { FaCodeBranch, FaSyncAlt } from "react-icons/fa";
 
 interface TimelineItem {
   name: string;
@@ -10,6 +11,8 @@ interface TimelineItem {
   createdAt: string;
   updatedAt: string;
   commits: number;
+  hashCommits?: string;
+  message?: string;
 }
 
 interface TimelineEntry {
@@ -83,37 +86,92 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
           >
             <motion.div
               style={{ height: heightTransform, opacity: opacityTransform }}
-              className="absolute inset-x-0 top-0 w-[2px] bg-gradient-to-b from-purple-500 via-blue-500 to-transparent"
+              className="absolute inset-x-0 top-0 w-[2px] bg-gradient-to-b from-amber-500 via-orange-500 to-transparent"
             />
           </div>
           {Object.entries(groupedData)
             .sort(([yearA], [yearB]) => Number(yearB) - Number(yearA)) // Urutkan tahun dari terbaru ke lama
             .map(([year, months]) => (
               <div key={year} className="mb-10 flex relative">
-                <h2 className="text-5xl font-bold text-gray-300">{year}</h2>
+                <h2 className="text-5xl font-bold text-gray-300 transition-colors hover:text-amber-500">
+                  {year}
+                </h2>{" "}
                 <div className="absolute -left-[31px] top-[15px] w-4 h-4 bg-amber-500 rounded-full border-4 border-white" />
-                <div className="w-full">
+                <div className="w-full relative ml-10">
                   {Object.entries(months)
                     .sort(
                       ([monthA], [monthB]) =>
                         monthOrder(monthB) - monthOrder(monthA)
-                    ) // Urutkan bulan dari terbaru ke lama
+                    )
                     .map(([month, items]) => (
-                      <div key={month} className="mb-6 relative w-full">
-                        <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-5 md:p-6 ml-6 md:ml-12">
-                          <h3 className="text-lg md:text-xl font-semibold text-gray-800 dark:text-white">
+                      <div
+                        key={month}
+                        className="mb-6 relative w-full px-4 py-2 rounded-md"
+                      >
+                        <div className="">
+                          <h3 className="text-2xl font-bold text-amber-500">
                             {month}
                           </h3>
-                          <ul className="mt-2 text-gray-600 dark:text-gray-300 text-sm md:text-base">
+                          <ul className="mt-2 space-y-3">
                             {items.map((item, i) => (
-                              <li key={i} className="mt-1">
-                                <span className="font-medium">
-                                  {formatName(item.name)}
-                                </span>
-                                <span>{item.description}</span>
-                                <span>{item.url}</span>
-                                <span>{item.updatedAt}</span>
-                                <span>{item.commits}</span>
+                              <li key={i} className="flex flex-col">
+                                <motion.div
+                                  initial={{ opacity: 0, y: 20 }}
+                                  whileInView={{ opacity: 1, y: 0 }}
+                                  whileHover={{
+                                    scale: 1.05,
+                                    boxShadow:
+                                      "0px 4px 10px rgba(255, 193, 7, 0.3)",
+                                  }}
+                                  viewport={{ once: true }}
+                                  transition={{ duration: 0.3 }}
+                                  className="flex flex-col w-full background-main border-2 border-amber-500 px-4 py-3 rounded-md"
+                                >
+                                  {/* Nama Repository */}
+                                  <div className="mb-4">
+                                    <h3 className="font-bold text-white text-xl text-right">
+                                      {formatName(item.name)}
+                                    </h3>
+                                  </div>
+
+                                  <div className="grid grid-cols-3 grid-rows-1 gap-4 text-neutral-200 text-sm md:text-base">
+                                    <span className="flex items-center gap-2">
+                                      <FaSyncAlt className="text-gray-400 text-lg" />
+                                      {new Date(
+                                        item.updatedAt
+                                      ).toLocaleDateString("en-US", {
+                                        month: "short",
+                                        day: "numeric",
+                                      })}
+                                      ,{" "}
+                                      {new Date(
+                                        item.updatedAt
+                                      ).toLocaleTimeString("en-US", {
+                                        hour: "2-digit",
+                                        minute: "2-digit",
+                                        hour12: true,
+                                      })}
+                                    </span>
+
+                                    {/* Hash Commit */}
+                                    <span className="relative group flex items-center gap-2 mx-auto">
+                                      <FaCodeBranch className="text-gray-700 text-[20px]" />
+                                      {item.hashCommits?.slice(0, 8) || "N/A"}
+
+                                      {/* Tooltip */}
+                                      {item.hashCommits && (
+                                        <span className="absolute left-0 bottom-full mb-2 px-2 py-1 bg-gray-800 text-white text-xs rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
+                                          {item.hashCommits}
+                                        </span>
+                                      )}
+                                    </span>
+
+                                    {/* Commit Message */}
+                                    <div className="text-green-500 text-sm ml-auto">
+                                      <span className="">{item.message}</span>
+                                    </div>
+                                  </div>
+                                </motion.div>
                               </li>
                             ))}
                           </ul>

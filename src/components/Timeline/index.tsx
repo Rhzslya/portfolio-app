@@ -11,6 +11,8 @@ interface Repo {
   createdAt: string;
   updatedAt: string;
   commits: number;
+  hashCommits?: string;
+  message?: string;
 }
 
 interface TimelineItem {
@@ -20,6 +22,8 @@ interface TimelineItem {
   createdAt: string;
   updatedAt: string;
   commits: number;
+  hashCommits?: string;
+  message?: string;
 }
 
 interface TimelineEntry {
@@ -39,6 +43,8 @@ export function Timeline({ repoData }: { repoData: Repo[] }) {
         description: repo.description,
         url: repo.url,
         commits: repo.commits,
+        hashCommits: repo.hashCommits,
+        message: repo.message,
       })),
     },
   ];

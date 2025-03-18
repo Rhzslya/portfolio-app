@@ -13,6 +13,7 @@ interface GitHubRepo {
   defaultBranchRef?: {
     target?: {
       history?: {
+        nodes?: { oid?: string; message: string }[];
         totalCount?: number;
       };
     };
@@ -31,6 +32,8 @@ export default function ExperienceBox({
       url: string;
       updatedAt: string;
       commits: number;
+      hashCommits: string;
+      message: string;
     }[]
   ) => void;
 }) {
@@ -62,6 +65,11 @@ export default function ExperienceBox({
           url: repo.url,
           updatedAt: repo.updatedAt,
           commits: repo.defaultBranchRef?.target?.history?.totalCount,
+          hashCommits:
+            repo.defaultBranchRef?.target?.history?.nodes?.[0]?.oid || "N/A",
+          message:
+            repo.defaultBranchRef?.target?.history?.nodes?.[0]?.message ||
+            "N/A",
         }));
 
         setRepoData(repos);
@@ -71,7 +79,7 @@ export default function ExperienceBox({
     };
 
     fetchGitHubStats();
-  }, []);
+  }, [setRepoData]);
 
   const stats = [
     { num: new Date().getFullYear() - startYear, text: "Years of Experience" },

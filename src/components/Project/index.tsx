@@ -13,6 +13,8 @@ interface Repo {
   createdAt: string;
   updatedAt: string;
   commits: number;
+  hashCommits?: string;
+  message?: string;
 }
 
 const Project = ({ repoData }: { repoData: Repo[] }) => {

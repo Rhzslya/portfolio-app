@@ -17,6 +17,8 @@ const HeroPage = ({
       url: string;
       updatedAt: string;
       commits: number;
+      hashCommits?: string;
+      message?: string;
     }[]
   ) => void;
 }) => {

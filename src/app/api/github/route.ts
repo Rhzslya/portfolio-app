@@ -39,9 +39,13 @@ query {
           totalCount
         }
         defaultBranchRef {
-          target {
+        target {
             ... on Commit {
-              history {
+              history(first: 1) {
+                nodes {
+                  oid
+                  message
+                }
                 totalCount
               }
             }
