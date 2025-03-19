@@ -3,22 +3,8 @@ import CountUp from "react-countup";
 import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "@/utils/FramerMotionStyle";
 import { SparklesCore } from "../ui/sparkles";
-interface GitHubRepo {
-  name: string;
-  createdAt: string;
-  description: string;
-  url: string;
-  updatedAt: string;
-  commits: number;
-  defaultBranchRef?: {
-    target?: {
-      history?: {
-        nodes?: { oid?: string; message: string }[];
-        totalCount?: number;
-      };
-    };
-  };
-}
+import { GitHubRepo } from "@/utils/Type";
+
 const startYear = 2023;
 
 export default function ExperienceBox({
@@ -27,13 +13,18 @@ export default function ExperienceBox({
   setRepoData: (
     repos: {
       name: string;
-      createdAt: string;
-      description: string;
       url: string;
+      createdAt: string;
       updatedAt: string;
-      commits: number;
-      hashCommits: string;
+      totalCount: number;
+      description: string;
+      hashCommit: string;
       message: string;
+      latestCommit: {
+        sha: string;
+        message: string;
+        commitUrl: string;
+      };
     }[]
   ) => void;
 }) {
@@ -48,31 +39,34 @@ export default function ExperienceBox({
 
         const data = await response.json();
 
-        setTotalRepos(data.repositories.totalCount);
+        setTotalRepos(data.length);
 
-        const commitCount = data.repositories.nodes.reduce(
-          (sum: number, repo: GitHubRepo) =>
-            sum + (repo.defaultBranchRef?.target?.history?.totalCount || 0),
+        const totalCommits = data.reduce(
+          (sum: number, repo: GitHubRepo) => sum + (repo.totalCount || 0),
           0
         );
-        setTotalCommits(commitCount);
+        setTotalCommits(totalCommits);
 
         // Ambil nama & tanggal repo
-        const repos = data.repositories.nodes.map((repo: GitHubRepo) => ({
-          name: repo.name,
-          createdAt: repo.createdAt,
-          description: repo.description,
-          url: repo.url,
-          updatedAt: repo.updatedAt,
-          commits: repo.defaultBranchRef?.target?.history?.totalCount,
-          hashCommits:
-            repo.defaultBranchRef?.target?.history?.nodes?.[0]?.oid || "N/A",
-          message:
-            repo.defaultBranchRef?.target?.history?.nodes?.[0]?.message ||
-            "N/A",
-        }));
+        const repositories = data.map((repo: GitHubRepo) => {
+          return {
+            name: repo.name,
+            url: repo.url,
+            createdAt: repo.createdAt,
+            updatedAt: repo.updatedAt,
+            description: repo.description,
+            hashCommit: repo.hashCommit ?? null,
+            latestCommit: repo.latestCommit
+              ? {
+                  sha: repo.latestCommit.sha,
+                  message: repo.latestCommit.message,
+                  commitUrl: `${repo.url}/commit/${repo.latestCommit.sha}`,
+                }
+              : null,
+          };
+        });
 
-        setRepoData(repos);
+        setRepoData(repositories);
       } catch (error) {
         console.error("Error fetching GitHub data:", error);
       }

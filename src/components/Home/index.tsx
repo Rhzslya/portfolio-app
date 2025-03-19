@@ -12,13 +12,18 @@ const HeroPage = ({
   setRepoData: (
     repos: {
       name: string;
-      createdAt: string;
-      description: string;
       url: string;
+      createdAt: string;
       updatedAt: string;
-      commits: number;
-      hashCommits?: string;
-      message?: string;
+      totalCount: number;
+      description: string;
+      hashCommit: string;
+      message: string;
+      latestCommit: {
+        sha: string;
+        message: string;
+        commitUrl: string;
+      };
     }[]
   ) => void;
 }) => {

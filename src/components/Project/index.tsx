@@ -5,19 +5,9 @@ import { ScrollingTechStack } from "../InfiniteMovingCards";
 import { ColourfulText } from "../ui/colorful-text";
 import { BentoProject } from "../BentoProject";
 import { Timeline } from "../Timeline";
+import { GitHubRepo } from "@/utils/Type";
 
-interface Repo {
-  name: string;
-  description: string;
-  url: string;
-  createdAt: string;
-  updatedAt: string;
-  commits: number;
-  hashCommits?: string;
-  message?: string;
-}
-
-const Project = ({ repoData }: { repoData: Repo[] }) => {
+const Project = ({ repoData }: { repoData: GitHubRepo[] }) => {
   return (
     <div className="grid grid-cols-1  gap-8 grid-rows-[auto_1fr_auto]">
       <div className="stack-project-container">

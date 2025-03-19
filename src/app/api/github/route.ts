@@ -1,5 +1,28 @@
 import { NextResponse } from "next/server";
 
+interface CommitInfo {
+  sha: string;
+  message: string;
+  commitUrl: string;
+}
+
+interface Repo {
+  name: string;
+  createdAt: string;
+  description: string;
+  url: string;
+  updatedAt: string;
+  latestCommit?: CommitInfo;
+  defaultBranchRef?: {
+    target?: {
+      history?: {
+        nodes?: { oid?: string; message: string }[];
+        totalCount?: number;
+      };
+    };
+  };
+}
+
 export async function GET() {
   const GITHUB_ACCESS_TOKEN = process.env.GITHUB_ACCESS_TOKEN;
   if (!GITHUB_ACCESS_TOKEN) {
@@ -20,33 +43,15 @@ query {
         updatedAt
         description
         url
-        visibility
-        primaryLanguage {
-          name
-        }
-        repositoryTopics(first: 5) {
-          nodes {
-            topic {
-              name
-            }
-          }
-        }
-        stargazers {
-          totalCount
-        }
-        forkCount
-        issues(states: OPEN) {
-          totalCount
-        }
         defaultBranchRef {
-        target {
+          target {
             ... on Commit {
               history(first: 1) {
                 nodes {
                   oid
                   message
                 }
-                totalCount
+                  totalCount
               }
             }
           }
@@ -54,9 +59,7 @@ query {
       }
     }
   }
-}
-
-  `;
+}`;
 
   try {
     const response = await fetch("https://api.github.com/graphql", {
@@ -71,7 +74,31 @@ query {
     const data = await response.json();
     if (!data.data) throw new Error("GitHub API error");
 
-    return NextResponse.json(data.data.user);
+    const repositories = data.data.user.repositories.nodes.map((repo: Repo) => {
+      // Pastikan nodes tidak undefined
+      const latestCommit =
+        repo.defaultBranchRef?.target?.history?.nodes?.[0] ?? null;
+
+      return {
+        name: repo.name,
+        url: repo.url,
+        createdAt: repo.createdAt,
+        updatedAt: repo.updatedAt,
+        totalCount: repo.defaultBranchRef?.target?.history?.totalCount,
+        description: repo.description,
+        hashCommit: latestCommit?.oid ?? null,
+        message: latestCommit?.message ?? null,
+        latestCommit: latestCommit
+          ? {
+              sha: latestCommit.oid,
+              message: latestCommit.message,
+              commitUrl: `${repo.url}/commit/${latestCommit.oid}`,
+            }
+          : null,
+      };
+    });
+
+    return NextResponse.json(repositories);
   } catch (error) {
     console.error("GitHub API Error:", error);
     return NextResponse.json(
