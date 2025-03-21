@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 import RandomRunningDot from "../RandomRunningDot";
 import HamburgerMenu from "../HamburgerMenu";
 import { motion } from "framer-motion";
+import { ArrowDownIcon } from "@/utils/Icon";
 
 const Navbar = () => {
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
@@ -103,9 +104,12 @@ const Navbar = () => {
             <div className="flex flex-wrap justify-between items-center mt-auto mb-8 mx-8">
               <div className="box-resume relative flex sm:hidden justify-center items-center text-center mx-3">
                 <button className="group relative flex items-center justify-center">
-                  <i className="bx bx-download text-3xl text-white group-hover:text-gray-400 duration-300"></i>
+                  <ArrowDownIcon
+                    size={28}
+                    className="text-white group-hover:text-gray-400 duration-300"
+                  />{" "}
                   <span
-                    className="absolute text-nowrap left-1/2 -translate-x-1/2 top-full mt-4 text-white text-sm font-semibold px-2 py-1 rounded-md 
+                    className="absolute text-nowrap left-1/2 -translate-x-1/2 -top-full -translate-y-full mt-4 text-white text-sm font-semibold px-2 py-1 rounded-md 
                      opacity-0 invisible group-hover:opacity-100 group-hover:visible duration-300"
                   >
                     Download CV
@@ -148,7 +152,10 @@ const Navbar = () => {
           </div>
           <div className="box-resume relative hidden sm:flex justify-center items-center text-center mx-3">
             <button className="group relative flex items-center justify-center">
-              <i className="bx bx-download text-3xl text-white group-hover:text-gray-400 duration-300"></i>
+              <ArrowDownIcon
+                size={28}
+                className="text-white group-hover:text-gray-400 duration-300"
+              />
               <span
                 className="absolute text-nowrap left-1/2 -translate-x-1/2 top-full mt-4 text-white text-sm font-semibold px-2 py-1 rounded-md 
                      opacity-0 invisible group-hover:opacity-100 group-hover:visible duration-300"

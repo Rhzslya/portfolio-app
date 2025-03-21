@@ -21,7 +21,7 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
           }`}
         ></div>
         <div
-          className={`w-[30px] h-[2px] bg-white rounded-sm ${
+          className={`w-[20px] h-[2px] bg-white rounded-sm ${
             isBurgerOpen ? "opacity-0" : ""
           }`}
         ></div>

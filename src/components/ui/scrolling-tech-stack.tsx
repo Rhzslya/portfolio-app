@@ -71,7 +71,7 @@ export const InfiniteMovingCards = ({
     <div
       ref={containerRef}
       className={cn(
-        "scroller relative z-20 py-8  max-w-7xl overflow-hidden  [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]",
+        "scroller relative z-20 py-3 md:py-4 lg:py-6 xl:py-8  max-w-7xl overflow-hidden  [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]",
         className
       )}
     >
@@ -95,8 +95,8 @@ export const InfiniteMovingCards = ({
             src={`/assets/stacks/${stack}.svg`}
             alt={stack}
             width={100}
-            height={100}
-            className="h-[100px] filter mx-8"
+            height={0}
+            className="h-[70px] md:h-[80px] lg:h-[90px] xl:h-[100px]  filter mx-8"
           />
         ))}
       </ul>

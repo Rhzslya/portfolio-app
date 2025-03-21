@@ -23,10 +23,12 @@ export function BentoProject() {
                 <Image
                   src={`/project/${item.image}.png`}
                   alt={item.title}
-                  layout="fill"
                   objectFit="cover"
+                  fill
                   className="rounded-xl group-hover:scale-105 duration-300"
                   priority={i === 0}
+                  placeholder="blur"
+                  blurDataURL={`/project/${item.image}.png`}
                 />
               </div>
             }

@@ -4,7 +4,7 @@ export const items = [
     description:
       "A simple WhatsApp bot for message automation using Node.js and MongoDB.",
     stack: ["typescript", "nodejs", "nodemon", "mongodb"],
-    link: "https://facebook.com",
+    link: "https://github.com/Rhzslya/bot-wa",
     image: "flugel-bot",
   },
   {
@@ -34,7 +34,7 @@ export const items = [
     description:
       "A Java-based restaurant management app for handling orders and inventory.",
     stack: ["java"],
-    link: "https://github.com/username/restaurant-management",
+    link: "https://github.com/Rhzslya/Manage_Restaurant",
     image: "restaurant-management",
   },
   {
@@ -42,7 +42,7 @@ export const items = [
     description:
       "An interactive portfolio website with animations using React and Framer Motion.",
     stack: ["react", "react-router", "framer-motion", "gh-pages"],
-    link: "https://github.com/username/portfolio",
+    link: "https://rhzslya.github.io/rizqisabila/",
     image: "portfolio-app",
   },
   {

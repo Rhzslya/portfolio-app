@@ -26,8 +26,10 @@ export const Timeline = ({ data }: { data: GitHubRepo[] }) => {
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start 10%", "end 100%"],
+    offset: ["start 0%", "end 100%"],
   });
+
+  console.log(lineHeight);
 
   const heightTransform = useTransform(
     scrollYProgress,
@@ -59,18 +61,18 @@ export const Timeline = ({ data }: { data: GitHubRepo[] }) => {
   let globalIndex = 0;
   return (
     <div
-      className="w-full font-sans px-6 md:px-10 py-10 background-main"
+      className="w-full font-sans px-4 sm:px-6 md:px-10 py-10 background-main"
       ref={containerRef}
     >
       <div className="max-w-7xl mx-auto">
         <div className="relative pl-6 md:pl-12">
           <div
             ref={lineRef}
-            className="absolute left-3 md:left-6 w-[2px] bg-gray-300 dark:bg-gray-700 h-full"
+            className="absolute left-3 md:left-6 w-[2px] bg-gray-300 h-full"
           >
             <motion.div
               style={{ height: heightTransform, opacity: opacityTransform }}
-              className="absolute inset-x-0 top-0 w-[2px] bg-gradient-to-b from-amber-500 via-orange-500 to-transparent"
+              className="absolute inset-x-0 w-[2px] bg-gradient-to-b from-amber-500 via-orange-500 to-transparent"
             />
           </div>
           {Object.entries(groupedData)
@@ -78,13 +80,13 @@ export const Timeline = ({ data }: { data: GitHubRepo[] }) => {
             .map(([year, months]) => (
               <div key={year} className="mb-10 flex relative">
                 <motion.h2
-                  className="text-5xl font-bold transition-colors"
+                  className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold transition-colors"
                   style={{ color: yearColor }}
                 >
                   {year}
                 </motion.h2>{" "}
-                <div className="absolute -left-[31px] top-[15px] w-4 h-4 bg-amber-500 rounded-full border-4 border-white" />
-                <div className="w-full relative ml-10">
+                <div className="absolute -left-[20px] md:-left-[31px] top-[10px] md:top-[15px] w-4 h-4 bg-amber-500 rounded-full border-4 border-white" />
+                <div className="w-full relative ml-6 sm:ml-10">
                   {Object.entries(months)
                     .sort(
                       ([monthA], [monthB]) =>
@@ -93,10 +95,10 @@ export const Timeline = ({ data }: { data: GitHubRepo[] }) => {
                     .map(([month, items]) => (
                       <div
                         key={month}
-                        className="mb-6 relative w-full px-4 py-2 rounded-md"
+                        className="mb-4 sm:mb-6 relative w-full px-0 sm:px-4 py-2 rounded-md"
                       >
                         <div className="">
-                          <h3 className="text-2xl font-bold text-amber-500">
+                          <h3 className=" text-xl sm:text-2xl font-bold text-amber-500">
                             {month}
                           </h3>
                           <ul className="mt-2 space-y-3">
@@ -108,13 +110,16 @@ export const Timeline = ({ data }: { data: GitHubRepo[] }) => {
                                 <li
                                   key={item.hashCommit}
                                   className={`grid ${
-                                    isLeft ? "justify-start" : "justify-end"
+                                    isLeft
+                                      ? "md:justify-start"
+                                      : "md:justify-end"
                                   }`}
                                 >
                                   <Link
                                     href={`${item.latestCommit?.commitUrl}`}
                                     target="_blank"
                                     rel="noopener noreferrer"
+                                    className="group"
                                   >
                                     <motion.div
                                       initial={{ opacity: 0, y: 20 }}
@@ -126,7 +131,7 @@ export const Timeline = ({ data }: { data: GitHubRepo[] }) => {
                                       }}
                                       viewport={{ once: true }}
                                       transition={{ duration: 0.3 }}
-                                      className={`relative flex flex-col w-full background-main border-2 border-amber-500 px-4 py-3 rounded-md ${
+                                      className={`relative flex flex-col max-w-[465px] sm:max-w-full w-full background-main border-2 border-amber-500 px-4 py-3 rounded-md ${
                                         isLeft ? "self-start" : "self-end"
                                       }`}
                                     >
@@ -136,14 +141,15 @@ export const Timeline = ({ data }: { data: GitHubRepo[] }) => {
                                         initial="hidden"
                                         animate="visible"
                                       ></motion.div>
-                                      <div className="mb-4">
-                                        <h3 className="font-bold text-white text-xl text-right">
+                                      <div className="relative mb-4 ml-auto">
+                                        <h3 className="font-bold text-white text-base sm:text-xl text-right">
                                           {formatName(item.name)}
                                         </h3>
+                                        <span className="absolute left-0 bottom-0 w-full h-[1px] bg-white scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300"></span>
                                       </div>
 
-                                      <div className="grid grid-cols-3 grid-rows-1 gap-4 text-neutral-200 text-sm md:text-base">
-                                        <span className="flex items-center gap-2">
+                                      <div className="grid grid-rows-auto md:grid-cols-3 grid-rows-1 gap-4 text-neutral-200 text-sm md:text-base">
+                                        <span className="flex items-center gap-2 text-xs sm:text-sm">
                                           <FaSyncAlt className="text-gray-400 text-lg" />
                                           {new Date(
                                             item.updatedAt
@@ -161,13 +167,13 @@ export const Timeline = ({ data }: { data: GitHubRepo[] }) => {
                                           })}
                                         </span>
 
-                                        <span className="relative group flex items-center gap-2 mx-auto">
+                                        <span className="relative group flex items-center gap-2 sm:mx-auto text-xs sm:text-sm">
                                           <FaCodeBranch className="text-gray-400 text-[20px]" />
                                           {item.hashCommit?.slice(0, 8) ||
                                             "N/A"}
                                         </span>
 
-                                        <div className="text-green-500 text-sm ml-auto">
+                                        <div className="text-green-500 text-xs sm:text-sm sm:ml-auto">
                                           <span className="">
                                             {item.latestCommit?.message}
                                           </span>
