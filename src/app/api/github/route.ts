@@ -75,7 +75,6 @@ query {
     if (!data.data) throw new Error("GitHub API error");
 
     const repositories = data.data.user.repositories.nodes.map((repo: Repo) => {
-      // Pastikan nodes tidak undefined
       const latestCommit =
         repo.defaultBranchRef?.target?.history?.nodes?.[0] ?? null;
 

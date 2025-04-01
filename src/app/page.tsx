@@ -1,7 +1,6 @@
 "use client";
 
 import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
 import HeroPage from "@/components/Home";
 import Project from "@/components/Project";
 import { useState } from "react";
@@ -29,7 +28,6 @@ export default function Main() {
       <HeroPage setRepoData={setRepoData} />
       <Project repoData={repoData} />
       <Contact />
-      <Footer />
     </div>
   );
 }

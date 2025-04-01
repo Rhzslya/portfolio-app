@@ -49,7 +49,7 @@ const Navbar = () => {
       transition={{ type: "spring", stiffness: 60, duration: 0.8 }}
       className="header fixed top-0 w-full flex justify-center px-6 max-[350px]:px-2 bg-transparent backdrop-blur-sm z-50"
     >
-      <RandomRunningDot />
+      <RandomRunningDot pos="bottom-0" />
       <nav className="w-[1400px]">
         <div className="container_navlink flex items-center justify-center">
           <div className="box_image mr-4 sm:mr-9 my-2">

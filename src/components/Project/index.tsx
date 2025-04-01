@@ -9,7 +9,7 @@ import { GitHubRepo } from "@/utils/Type";
 
 const Project = ({ repoData }: { repoData: GitHubRepo[] }) => {
   return (
-    <div className="grid grid-cols-1  gap-8 grid-rows-[auto_1fr_auto]">
+    <section className="grid grid-cols-1  gap-8 grid-rows-[auto_1fr_auto]">
       <div className="stack-project-container">
         <motion.h1
           className="text-gray-200 font-bold text-center relative z-10 text-nowrap my-5"
@@ -27,7 +27,7 @@ const Project = ({ repoData }: { repoData: GitHubRepo[] }) => {
       <div className="flex justify-center">
         <Timeline repoData={repoData} />
       </div>
-    </div>
+    </section>
   );
 };
 

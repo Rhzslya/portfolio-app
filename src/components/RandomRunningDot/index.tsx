@@ -1,6 +1,10 @@
 import { useEffect, useRef } from "react";
 
-function RandomRunningDot() {
+interface RandomRunningDotProps {
+  pos: string;
+}
+
+const RandomRunningDot: React.FC<RandomRunningDotProps> = ({ pos }) => {
   const dotRef = useRef<HTMLSpanElement | null>(null);
   const widthRef = useRef(10);
 
@@ -38,7 +42,7 @@ function RandomRunningDot() {
   }, []);
 
   return (
-    <span className="absolute left-0 bottom-0 w-full h-[1px] bg-gray-500">
+    <span className={`absolute left-0 ${pos} w-full h-[1px] bg-gray-500`}>
       <span
         ref={dotRef}
         className="absolute left-0 h-[1px] rounded-full animate-running-dot animate-random-dot transition-all duration-300 ease-in-out"
@@ -46,6 +50,6 @@ function RandomRunningDot() {
       ></span>
     </span>
   );
-}
+};
 
 export default RandomRunningDot;
