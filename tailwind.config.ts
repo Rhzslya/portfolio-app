@@ -55,6 +55,9 @@ const config: Config = {
   darkMode: "class",
   theme: {
     extend: {
+      screens: {
+        xs: "480px", // ✅ custom breakpoint di sini
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
