@@ -336,7 +336,7 @@ const Footer = () => {
             </motion.div>
           </div>
         </div>
-        ;
+
         <div className="border-t-[1px] border-gray-700 pt-6 mt-10">
           {/* Social Media Icons */}
           <motion.div
