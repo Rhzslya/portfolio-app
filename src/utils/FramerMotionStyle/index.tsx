@@ -14,6 +14,22 @@ export const slideInFromLeft = (delay: number) => ({
   },
 });
 
+export const slideInFromRight = (delay: number) => ({
+  hidden: {
+    x: 100,
+    opacity: 0,
+  },
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      delay,
+      duration: 0.8,
+      ease: "easeInOut",
+    },
+  },
+});
+
 export const fadeIn = (delay: number) => ({
   hidden: {
     opacity: 0,
@@ -105,6 +121,83 @@ export const scrollVariants = {
       duration: 1.5, // Durasi animasi
       repeat: Infinity, // Looping terus menerus
       ease: "easeInOut", // Efek animasi smooth
+    },
+  },
+};
+
+// utils/FramerMotionStyle.ts
+export const scrollVariantsBox = {
+  hidden: {
+    opacity: 0,
+    y: 50,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 1,
+      ease: "easeOut",
+    },
+  },
+};
+
+export const slideUpFade = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: "easeOut" },
+  },
+};
+
+export const zoomIn = {
+  hidden: { opacity: 0, scale: 0.8 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.8, ease: "easeOut" },
+  },
+};
+
+export const rotatePop = {
+  hidden: { opacity: 0, scale: 0.9, rotate: -5 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    rotate: 0,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
+};
+
+export const zoomInUp = {
+  hidden: { opacity: 0, y: 40, scale: 0.95 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      delay: i * 0.1,
+      duration: 0.6,
+      ease: "easeOut",
+    },
+  }),
+};
+
+export const slideInUp = {
+  hidden: { opacity: 0, y: 50 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: "easeOut" },
+  },
+};
+
+export const staggerContainer = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.1,
     },
   },
 };

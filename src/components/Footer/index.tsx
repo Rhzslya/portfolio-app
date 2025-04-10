@@ -6,6 +6,7 @@ import { FlipWords } from "../ui/flip-words";
 import { sectionsNav } from "@/utils/Sections";
 import { capitalizeFirst } from "@/utils/Capitalize";
 import { items } from "@/utils/ProjectList";
+import { AnimatePresence, motion } from "framer-motion";
 
 const Footer = () => {
   const [randomProjects, setRandomProjects] = useState<typeof items>([]);
@@ -72,14 +73,30 @@ const Footer = () => {
     >
       <div className="footer-container my-8">
         <div className="box_image my-2">
-          <div className="home-links flex items-center justify-center gap-1">
-            <Link href="/" as="/" className="">
-              <span className="text-5xl font-bold text-white">_Rizqi</span>
-              <span className="text-5xl font-bold text-amber-600">
-                Sabilla.
-              </span>
+          <motion.div className="home-links flex items-center justify-center gap-1">
+            <Link href="/" as="/">
+              <div className="flex items-center justify-center gap-1">
+                <motion.span
+                  className="text-5xl font-bold text-white"
+                  initial={{ opacity: 0, y: -40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                  viewport={{ once: true }}
+                >
+                  _Rizqi
+                </motion.span>
+                <motion.span
+                  className="text-5xl font-bold text-amber-600"
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  Sabilla.
+                </motion.span>
+              </div>
             </Link>
-          </div>
+          </motion.div>
 
           <div className="flex justify-center items-center mt-2 mb-4">
             <FlipWords words={words} />
@@ -89,60 +106,160 @@ const Footer = () => {
  grid-rows-5 xs:grid-rows-3 md:grid-rows-2 xl:grid-rows-1 xl:grid-cols-[auto,auto,auto,auto,1fr] gap-3 xs:gap-4 md:gap-6 p-3 xs:p-4 md:p-6 text-sm text-gray-300"
           >
             {/* Quick Links */}
-            <div className="flex flex-col gap-3 min-w-[100px] lg:min-w-[150px]">
-              <h3 className="text-white text-base font-semibold mb-1">
+            <motion.div
+              className="flex flex-col gap-3 min-w-[100px] lg:min-w-[150px]"
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              variants={{
+                hidden: {},
+                show: {
+                  transition: {
+                    staggerChildren: 0.08,
+                  },
+                },
+              }}
+            >
+              <motion.h3
+                className="text-white text-base font-semibold mb-1"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.4 }}
+              >
                 Quick Links
-              </h3>
+              </motion.h3>
+
               {sectionsNav?.map((item, index) => {
                 const linkPath = `/${item}`;
                 return (
-                  <Link
-                    href={linkPath}
+                  <motion.div
                     key={index}
-                    className="hover:text-white duration-200"
+                    variants={{
+                      hidden: { opacity: 0, x: -20 },
+                      show: { opacity: 1, x: 0 },
+                    }}
+                    transition={{ duration: 0.4 }}
                   >
-                    {capitalizeFirst(item)}
-                  </Link>
+                    <Link
+                      href={linkPath}
+                      className="hover:text-white duration-200"
+                    >
+                      {capitalizeFirst(item)}
+                    </Link>
+                  </motion.div>
                 );
               })}
-            </div>
+            </motion.div>
 
             {/* Dev Profiles */}
-            <div className="flex flex-col row-start-4 xs:row-auto gap-3 min-w-[100px] lg:min-w-[150px]">
-              <h3 className="text-white text-base font-semibold mb-1">
-                Dev Profiles
-              </h3>
-              <Link
-                href="https://github.com/rhzslya"
-                target="_blank"
-                className="flex items-center gap-2 hover:text-white duration-200"
+            <motion.div
+              className="flex flex-col row-start-4 xs:row-auto gap-3 min-w-[100px] lg:min-w-[150px]"
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              variants={{
+                hidden: {},
+                show: {
+                  transition: {
+                    staggerChildren: 0.08,
+                  },
+                },
+              }}
+            >
+              <motion.h3
+                className="text-white text-base font-semibold mb-1"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.4 }}
               >
-                <i className="fi fi-brands-github"></i> GitHub
-              </Link>
-            </div>
+                Dev Profiles
+              </motion.h3>
+
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0, x: -20 },
+                  show: { opacity: 1, x: 0 },
+                }}
+                transition={{ duration: 0.4 }}
+              >
+                <Link
+                  href="https://github.com/rhzslya"
+                  target="_blank"
+                  className="flex items-center gap-2 hover:text-white duration-200"
+                >
+                  <i className="fi fi-brands-github"></i> GitHub
+                </Link>
+              </motion.div>
+            </motion.div>
 
             {/* Other Projects */}
-            <div className="flex flex-col gap-3 min-w-[150px] lg:min-w-[200px]">
-              <h3 className="text-white text-base font-semibold mb-1">
+            <motion.div
+              className="flex flex-col gap-3 min-w-[150px] lg:min-w-[200px]"
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              variants={{
+                hidden: {},
+                show: {
+                  transition: {
+                    staggerChildren: 0.08,
+                  },
+                },
+              }}
+            >
+              <motion.h3
+                className="text-white text-base font-semibold mb-1"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.4 }}
+              >
                 Other Projects
-              </h3>
+              </motion.h3>
+
               {randomProjects.map((item, index) => (
-                <Link
+                <motion.div
                   key={index}
-                  href={item.link}
-                  target="_blank"
-                  className="hover:text-white duration-200"
+                  variants={{
+                    hidden: { opacity: 0, x: -20 },
+                    show: { opacity: 1, x: 0 },
+                  }}
+                  transition={{ duration: 0.4, delay: index * 0.05 }}
                 >
-                  {item.title}
-                </Link>
+                  <Link
+                    href={item.link}
+                    target="_blank"
+                    className="hover:text-white duration-200"
+                  >
+                    {item.title}
+                  </Link>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
 
             {/* Tech Stack */}
-            <div className="flex flex-col row-start-3 xs:row-auto gap-3 min-w-[150px] lg:min-w-[200px]">
-              <h3 className="text-white text-base font-semibold mb-1">
+            <motion.div
+              className="flex flex-col row-start-3 xs:row-auto xs:col-span-2 md:col-span-1 gap-3 min-w-[150px] lg:min-w-[200px]"
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              variants={{
+                hidden: {},
+                show: {
+                  transition: {
+                    staggerChildren: 0.08,
+                  },
+                },
+              }}
+            >
+              <motion.h3
+                className="text-white text-base font-semibold mb-1"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.4 }}
+              >
                 Tech Stack
-              </h3>
+              </motion.h3>
+
               <div className="grid grid-cols-2 gap-x-2 gap-y-3 md:gap-3">
                 {[
                   "Next.js",
@@ -152,19 +269,58 @@ const Footer = () => {
                   "Firebase",
                   "Vercel",
                 ].map((tech, i) => (
-                  <span key={i}>{tech}</span>
+                  <motion.span
+                    key={i}
+                    variants={{
+                      hidden: { opacity: 0, x: -20 },
+                      show: { opacity: 1, x: 0 },
+                    }}
+                    transition={{ duration: 0.4, delay: i * 0.05 }}
+                  >
+                    {tech}
+                  </motion.span>
                 ))}
               </div>
-            </div>
+            </motion.div>
 
-            <div className="flex flex-col gap-3 min-w-[250px] xl:ml-auto  md:col-start-2 xs:col-span-2 lg:col-span-1 lg:col-start-3 row-start-5 xs:row-start-3 md:row-start-2  xl:col-start-5 xl:row-start-1">
-              <h3 className="text-white text-base font-semibold mb-1">
+            <motion.div
+              className="flex flex-col gap-3 min-w-[250px] xl:ml-auto md:col-start-2 xs:col-span-2 lg:col-span-1 lg:col-start-3 row-start-5 xs:row-start-3 md:row-start-2 xl:col-start-5 xl:row-start-1"
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              variants={{
+                hidden: {},
+                show: {
+                  transition: {
+                    staggerChildren: 0.1,
+                  },
+                },
+              }}
+            >
+              <motion.h3
+                className="text-white text-base font-semibold mb-1"
+                initial={{ opacity: 0, x: 40 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.4 }}
+              >
                 Subscribe
-              </h3>
-              <p className="text-gray-400 text-sm">
+              </motion.h3>
+
+              <motion.p
+                className="text-gray-400 text-sm"
+                initial={{ opacity: 0, x: 40 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.4, delay: 0.1 }}
+              >
                 Get updates about my latest projects & dev content.
-              </p>
-              <form className="flex gap-2">
+              </motion.p>
+
+              <motion.form
+                className="flex gap-2"
+                initial={{ opacity: 0, x: 40 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.4, delay: 0.2 }}
+              >
                 <input
                   type="email"
                   placeholder="Enter your email"
@@ -176,45 +332,85 @@ const Footer = () => {
                 >
                   Subscribe
                 </button>
-              </form>
-            </div>
+              </motion.form>
+            </motion.div>
           </div>
         </div>
-        <div className="border-t-[1px] border-gray-500">
-          <div className="social_media_box hidden mt-8 sm:flex items-center justify-center gap-x-4 text-white text-[28px] mx-8">
+        ;
+        <div className="border-t-[1px] border-gray-700 pt-6 mt-10">
+          {/* Social Media Icons */}
+          <motion.div
+            className="hidden sm:flex items-center justify-center gap-x-4 text-white text-[24px] mx-8"
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            variants={{
+              hidden: {},
+              show: {
+                transition: {
+                  staggerChildren: 0.1,
+                },
+              },
+            }}
+          >
             {socialMedia.map((social, index) => (
-              <Link
+              <motion.div
                 key={index}
-                href={social.url}
-                className="relative group hover:text-gray-400 duration-300"
-                target="_blank"
-                rel="noopener noreferrer"
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  show: { opacity: 1, y: 0 },
+                }}
+                transition={{ duration: 0.3 }}
               >
-                <i
-                  className={`fi fi-brands-${social.name} flex items-center justify-center`}
-                ></i>
-              </Link>
+                <Link
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative group hover:text-amber-400 duration-300"
+                >
+                  <i
+                    className={`fi fi-brands-${social.name} flex items-center justify-center`}
+                  ></i>
+                  {/* Underline Hover Effect */}
+                  <span className="absolute bottom-[-4px] left-1/2 transform -translate-x-1/2 w-0 h-[2px] bg-amber-400 group-hover:w-4 transition-all duration-300"></span>
+                </Link>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
-          <div className="copy-right-mark text-center mt-6 text-gray-400 text-sm">
+          {/* Copyright */}
+          <motion.div
+            className="text-center mt-6 text-gray-500 text-sm"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.4, delay: 0.3 }}
+          >
             <p>
               © {new Date().getFullYear()} Rizqi Sabilla. Built with &lt;3 &amp;
               Next.js.
             </p>
-          </div>
+          </motion.div>
         </div>
       </div>
       {showScrollTop && (
-        <div className="scroll-top-button">
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="fixed bottom-6 right-6 z-50 bg-amber-600 hover:bg-amber-700 text-white p-3 rounded-full shadow-xl transition-all duration-300 hover:scale-110 hover:rotate-12 backdrop-blur-sm bg-opacity-90"
-            aria-label="Scroll to top"
+        <AnimatePresence>
+          <motion.div
+            key="scroll-top"
+            initial={{ opacity: 0, scale: 0.5, y: 50 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.5, y: 50 }}
+            transition={{ duration: 0.3 }}
+            className="fixed bottom-6 right-6 z-50"
           >
-            <i className="fi fi-rr-arrow-small-up text-xl" />
-          </button>
-        </div>
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              className="bg-gradient-to-br from-amber-500 to-yellow-400 hover:from-amber-600 hover:to-yellow-500 text-white p-3 rounded-full shadow-lg backdrop-blur-md bg-opacity-90 transition-transform duration-300 hover:scale-110 hover:rotate-[8deg]"
+              aria-label="Scroll to top"
+            >
+              <i className="fi fi-rr-arrow-small-up text-xl" />
+            </button>
+          </motion.div>
+        </AnimatePresence>
       )}
     </section>
   );

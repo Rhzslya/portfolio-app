@@ -1,6 +1,7 @@
 import { cn } from "@/utils/lib/utils";
 import { GlowingEffect } from "./glowing-effect";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import {
   SiTypescript,
   SiJavascript,
@@ -71,6 +72,7 @@ export const BentoGridItem = ({
   header,
   link,
   stack,
+  index,
 }: {
   className?: string;
   title?: string | React.ReactNode;
@@ -79,6 +81,7 @@ export const BentoGridItem = ({
   icon?: React.ReactNode;
   link?: string;
   stack?: string[] | string;
+  index?: number;
 }) => {
   return (
     <Link
@@ -92,21 +95,58 @@ export const BentoGridItem = ({
       <GlowingEffect disabled={false} glow={true} />
       {header}
       <div className="group-hover/bento:translate-x-2 transition duration-200">
-        <div className="font-sans font-bold text-gray-300 mb-2 mt-2">
+        <motion.div
+          className="font-sans font-bold text-gray-300 mb-2 mt-2"
+          initial={{ opacity: 0, y: -30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ type: "spring", stiffness: 300 }}
+          viewport={{ once: true }}
+        >
           {title}
-        </div>
-        <div className="font-sans font-normal text-gray-300 text-xs">
-          {description}
-        </div>
+        </motion.div>
 
-        <div className="flex items-center gap-2 mt-2">
+        <motion.div
+          className="font-sans font-normal text-gray-300 text-xs"
+          initial={{
+            opacity: 0,
+            x: index !== undefined && index % 2 === 0 ? -40 : 40,
+          }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          viewport={{ once: true }}
+        >
+          {description}
+        </motion.div>
+
+        <motion.div
+          className="flex items-center gap-2 mt-2"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          variants={{
+            hidden: {},
+            show: {
+              transition: {
+                staggerChildren: 0.1,
+              },
+            },
+          }}
+        >
           {Array.isArray(stack) &&
             stack.map((tech) => (
-              <span key={tech} className="flex items-center gap-1">
+              <motion.span
+                key={tech}
+                className="flex items-center gap-1"
+                variants={{
+                  hidden: { opacity: 0, y: 10 },
+                  show: { opacity: 1, y: 0 },
+                }}
+                transition={{ duration: 0.4 }}
+              >
                 {stackIcons[tech] || null}
-              </span>
+              </motion.span>
             ))}
-        </div>
+        </motion.div>
       </div>
     </Link>
   );

@@ -29,8 +29,6 @@ export const Timeline = ({ data }: { data: GitHubRepo[] }) => {
     offset: ["start 0%", "end 100%"],
   });
 
-  console.log(lineHeight);
-
   const heightTransform = useTransform(
     scrollYProgress,
     [0, 1],
@@ -98,9 +96,16 @@ export const Timeline = ({ data }: { data: GitHubRepo[] }) => {
                         className="mb-4 sm:mb-6 relative w-full px-0 sm:px-4 py-2 rounded-md"
                       >
                         <div className="">
-                          <h3 className=" text-xl sm:text-2xl font-bold text-amber-500">
+                          <motion.h3
+                            className="text-xl sm:text-2xl font-bold text-amber-500"
+                            initial={{ opacity: 0, y: -20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5 }}
+                            viewport={{ once: true }}
+                          >
                             {month}
-                          </h3>
+                          </motion.h3>
+
                           <ul className="mt-2 space-y-3">
                             {items.map((item) => {
                               const isLeft = globalIndex % 2 === 0;
@@ -141,15 +146,27 @@ export const Timeline = ({ data }: { data: GitHubRepo[] }) => {
                                         initial="hidden"
                                         animate="visible"
                                       ></motion.div>
-                                      <div className="relative mb-4 ml-auto">
+                                      <motion.div
+                                        className="relative mb-4 ml-auto"
+                                        initial={{ opacity: 0, x: 20 }}
+                                        whileInView={{ opacity: 1, x: 0 }}
+                                        transition={{ duration: 0.5 }}
+                                        viewport={{ once: true }}
+                                      >
                                         <h3 className="font-bold text-white text-base sm:text-xl text-right">
                                           {formatName(item.name)}
                                         </h3>
                                         <span className="absolute left-0 bottom-0 w-full h-[1px] bg-white scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300"></span>
-                                      </div>
+                                      </motion.div>
 
                                       <div className="grid grid-rows-auto md:grid-cols-3 grid-rows-1 gap-4 text-neutral-200 text-sm md:text-base">
-                                        <span className="flex items-center gap-2 text-xs sm:text-sm">
+                                        <motion.span
+                                          className="flex items-center gap-2 text-xs sm:text-sm"
+                                          initial={{ opacity: 0, y: 20 }}
+                                          whileInView={{ opacity: 1, y: 0 }}
+                                          transition={{ duration: 0.4 }}
+                                          viewport={{ once: true }}
+                                        >
                                           <FaSyncAlt className="text-gray-400 text-lg" />
                                           {new Date(
                                             item.updatedAt
@@ -165,19 +182,31 @@ export const Timeline = ({ data }: { data: GitHubRepo[] }) => {
                                             minute: "2-digit",
                                             hour12: true,
                                           })}
-                                        </span>
+                                        </motion.span>
 
-                                        <span className="relative group flex items-center gap-2 sm:mx-auto text-xs sm:text-sm">
+                                        <motion.span
+                                          className="relative group flex items-center gap-2 sm:mx-auto text-xs sm:text-sm"
+                                          initial={{ opacity: 0, x: -20 }}
+                                          whileInView={{ opacity: 1, x: 0 }}
+                                          transition={{ duration: 0.4 }}
+                                          viewport={{ once: true }}
+                                        >
                                           <FaCodeBranch className="text-gray-400 text-[20px]" />
                                           {item.hashCommit?.slice(0, 8) ||
                                             "N/A"}
-                                        </span>
+                                        </motion.span>
 
-                                        <div className="text-green-500 text-xs sm:text-sm sm:ml-auto">
-                                          <span className="">
+                                        <motion.div
+                                          className="text-green-500 text-xs sm:text-sm sm:ml-auto"
+                                          initial={{ opacity: 0, y: 20 }}
+                                          whileInView={{ opacity: 1, y: 0 }}
+                                          transition={{ duration: 0.4 }}
+                                          viewport={{ once: true }}
+                                        >
+                                          <span>
                                             {item.latestCommit?.message}
                                           </span>
-                                        </div>
+                                        </motion.div>
                                       </div>
                                     </motion.div>
                                   </Link>

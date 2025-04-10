@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { BentoGrid, BentoGridItem } from "../ui/bento-grid";
 import Image from "next/image";
 import { items } from "@/utils/ProjectList";
+import { motion } from "framer-motion";
+import { zoomInUp } from "@/utils/FramerMotionStyle";
 
 export function BentoProject() {
   const [visibleItems, setVisibleItems] = useState(5);
@@ -10,7 +12,7 @@ export function BentoProject() {
     setVisibleItems((prev) => prev + 5);
   };
   return (
-    <div className="max-w-7xl mx-auto">
+    <motion.div className="max-w-7xl mx-auto">
       <BentoGrid>
         {items.slice(0, visibleItems).map((item, i) => (
           <BentoGridItem
@@ -18,8 +20,16 @@ export function BentoProject() {
             title={item.title}
             description={item.description}
             stack={item.stack}
+            index={i}
             header={
-              <div className="relative w-full h-full rounded-xl overflow-hidden">
+              <motion.div
+                className="relative w-full h-full rounded-xl overflow-hidden"
+                variants={zoomInUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+                custom={i}
+              >
                 <Image
                   src={`/project/${item.image}.png`}
                   alt={item.title}
@@ -30,7 +40,7 @@ export function BentoProject() {
                   placeholder="blur"
                   blurDataURL={`/project/${item.image}.png`}
                 />
-              </div>
+              </motion.div>
             }
             link={item.link}
             className={i === 3 || i === 6 ? "md:col-span-2" : ""}
@@ -48,6 +58,6 @@ export function BentoProject() {
           </button>
         </div>
       )}
-    </div>
+    </motion.div>
   );
 }

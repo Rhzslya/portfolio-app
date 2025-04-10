@@ -12,7 +12,8 @@ export function Timeline({ repoData }: { repoData: GitHubRepo[] }) {
         className="text-gray-300 font-bold text-center relative z-10 text-nowrap"
         style={{ fontSize: "clamp(2.5rem, 5vw, 5rem)" }}
         initial="hidden"
-        animate="visible"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.5 }} // biar animasinya muncul pas 50% elemen masuk layar
         variants={fadeIn(0.6)}
       >
         Timeline

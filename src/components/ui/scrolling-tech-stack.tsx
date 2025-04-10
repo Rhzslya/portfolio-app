@@ -5,7 +5,7 @@ import { STACKS } from "@/utils/Stack";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { backgroundVariants } from "@/utils/FramerMotionStyle";
+import { backgroundVariants, rotatePop } from "@/utils/FramerMotionStyle";
 
 export const InfiniteMovingCards = ({
   direction = "left",
@@ -68,24 +68,27 @@ export const InfiniteMovingCards = ({
     }
   };
   return (
-    <div
+    <motion.div
       ref={containerRef}
       className={cn(
-        "scroller relative z-20 py-3 md:py-4 lg:py-6 xl:py-8  max-w-7xl overflow-hidden  [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]",
+        "scroller relative z-20 py-3 md:py-4 lg:py-6 xl:py-8 max-w-7xl overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]",
         className
       )}
+      variants={rotatePop}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.4 }}
     >
       <motion.div
         className="absolute h-full inset-0 bg-dot-white/[0.8] [mask-image:radial-gradient(ellipse_at_center,black_10%,transparent_80%)] pointer-events-none"
         variants={backgroundVariants}
-        initial="hidden"
-        animate="visible"
       ></motion.div>
+
       <ul
         ref={scrollerRef}
         className={cn(
-          " flex min-w-full shrink-0 gap-4 py-4 w-max flex-nowrap",
-          start && "animate-scroll ",
+          "flex min-w-full shrink-0 gap-4 py-4 w-max flex-nowrap",
+          start && "animate-scroll",
           pauseOnHover && "hover:[animation-play-state:paused]"
         )}
       >
@@ -96,10 +99,10 @@ export const InfiniteMovingCards = ({
             alt={stack}
             width={100}
             height={0}
-            className="h-[70px] md:h-[80px] lg:h-[90px] xl:h-[100px]  filter mx-8"
+            className="h-[70px] md:h-[80px] lg:h-[90px] xl:h-[100px] filter mx-8"
           />
         ))}
       </ul>
-    </div>
+    </motion.div>
   );
 };

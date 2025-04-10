@@ -13,7 +13,8 @@ const Contact = () => {
           className="text-gray-300 font-bold text-center relative z-10 text-nowrap mb-8"
           style={{ fontSize: "clamp(2.5rem, 5vw, 5rem)" }}
           initial="hidden"
-          animate="visible"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }} // animasi jalan saat 50% masuk layar
           variants={fadeIn(0.6)}
         >
           Get In Touch
@@ -21,7 +22,13 @@ const Contact = () => {
 
         <div className="contact-content grid grid-cols-auto lg:grid-cols-2 grid-rows-1 gap-4">
           <div className="flex flex-col gap-8 lg:gap-16 py-2 px-0 sm:px-4 my-auto">
-            <div className="w-full flex flex-col lg:flex-row items-center gap-4 lg:gap-6">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="w-full flex flex-col lg:flex-row items-center gap-4 lg:gap-6"
+            >
               <BackgroundGradient>
                 <PhoneIcon
                   color="#fff"
@@ -31,13 +38,25 @@ const Contact = () => {
               </BackgroundGradient>
 
               <div className="phone">
-                <p className="text-center lg:text-left text-sm sm:text-base font-semibold">
+                <motion.p
+                  className="text-center lg:text-left text-sm sm:text-base font-semibold"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.4, delay: 0.4 }}
+                  viewport={{ once: true }}
+                >
                   +62 851 8339 2058
-                </p>
+                </motion.p>
               </div>
-            </div>
+            </motion.div>
 
-            <div className="w-full flex flex-col lg:flex-row  items-center gap-4 lg:gap-6">
+            <motion.div
+              className="w-full flex flex-col lg:flex-row  items-center gap-4 lg:gap-6"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
               <BackgroundGradient>
                 <MailIcon
                   color="#fff"
@@ -46,12 +65,24 @@ const Contact = () => {
                 />
               </BackgroundGradient>
               <div className="email">
-                <p className="text-center lg:text-left text-sm sm:text-base font-semibold ">
+                <motion.p
+                  className="text-center lg:text-left text-sm sm:text-base font-semibold "
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.4, delay: 0.4 }}
+                  viewport={{ once: true }}
+                >
                   rizqisabilla1@gmail.com
-                </p>
+                </motion.p>
               </div>
-            </div>
-            <div className="w-full flex flex-col lg:flex-row  items-center gap-4 lg:gap-6">
+            </motion.div>
+            <motion.div
+              className="w-full flex flex-col lg:flex-row  items-center gap-4 lg:gap-6"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
               <BackgroundGradient className="">
                 <LocationIcon
                   color="#fff"
@@ -61,17 +92,29 @@ const Contact = () => {
               </BackgroundGradient>
 
               <div className="address w-full max-w-[90%] sm:max-w-[80%] md:max-w-[60%] lg:max-w-[100%] ">
-                <p className="text-center lg:text-left text-sm sm:text-base font-semibold">
+                <motion.p
+                  className="text-center lg:text-left text-sm sm:text-base font-semibold"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.4, delay: 0.4 }}
+                  viewport={{ once: true }}
+                >
                   Jl. Guru Kojar, Kampung Pondok Belimbing, Kelurahan Jurang
                   Mangu Barat, Kecamatan Pondok Aren, Kota Tangerang Selatan,
                   Banten 15224
-                </p>
+                </motion.p>
               </div>
-            </div>
+            </motion.div>
           </div>
-          <div className="flex justify-center items-center rounded-md min-h-[300px] sm:min-h-[350px] md:min-h-[450px] lg:min-h-[350px] p-0 sm:p-4">
+          <motion.div
+            className="flex justify-center items-center rounded-md min-h-[300px] sm:min-h-[350px] md:min-h-[450px] lg:min-h-[350px] p-0 sm:p-4"
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            viewport={{ once: true }}
+          >
             <Map />
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
