@@ -78,7 +78,7 @@ const Navbar = () => {
             </div>
           </div>
           <div
-            className={`navbar-mobile lg:hidden fixed top-0 mt-[56px] pb-12 background-main left-0 w-full h-screen flex flex-col transform transition-transform duration-300 ${
+            className={`navbar-mobile lg:hidden fixed top-0 mt-[48px] md:mt-[52px] lg:mt-[56px] pb-12 background-main left-0 w-full h-screen flex flex-col transform transition-transform duration-300 overflow-hidden ${
               isBurgerOpen ? "translate-x-0" : "translate-x-full"
             }`}
           >
@@ -102,7 +102,7 @@ const Navbar = () => {
                 );
               })}
             </div>
-            <div className="flex flex-wrap justify-between items-center mt-auto mb-8 mx-8">
+            <div className="flex flex-wrap justify-between items-center mt-auto mb-14 mx-8">
               <div className="box-resume relative flex sm:hidden justify-center items-center text-center mx-3">
                 <button className="group relative flex items-center justify-center">
                   <ArrowDownIcon
