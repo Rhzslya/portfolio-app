@@ -24,7 +24,7 @@ export default function Main() {
   >([]);
 
   return (
-    <div className="my-[56px] px-10 lg:px-14 pt-14">
+    <div className="my-[48px] md:my-[52px] lg:my-[56px] px-2 xs:px-6 md:px-10 lg:px-14 pt-14">
       <HeroPage setRepoData={setRepoData} />
       <Project repoData={repoData} />
       <Contact />

@@ -197,11 +197,11 @@ export default function TerminalWithApi() {
       whileHover={{ scale: 1.02 }} // Efek sedikit membesar saat di-hover
       className="lg:col-start-1 row-start-5 lg:row-start-2 lg:row-span-2 xl:row-span-1"
     >
-      <div className="p-4 border max-w-[400px] lg:max-w-[300px] mx-auto xl:max-w-[300px] xl:w-full lg:max-h-[300px] h-full border-green-500 bg-black text-green-400 font-mono rounded-md text-base lg:text-base">
+      <div className="p-4 border max-w-[300px] md:max-w-[400px] lg:max-w-[300px] mx-auto xl:max-w-[300px] xl:w-full lg:max-h-[300px] h-full border-green-500 bg-black text-green-400 font-mono rounded-md text-base lg:text-base">
         <h3 className="text-center text-xl max-[350px]:text-xl min-[350px]:text-2xl lg:text-xl mb-2 text-amber-500 font-press-start-2p">
           8-Bit Shell
         </h3>
-        <p className="my-2 max-[350px]:text-sm">
+        <p className="my-2 text-sm lg:text-base">
           {isAddingCommand
             ? "Command creation mode active! Type your command."
             : 'Need help? Type "help" to see available commands.'}
@@ -217,7 +217,7 @@ export default function TerminalWithApi() {
               playTypingSound(); // Tambahkan suara saat mengetik
             }}
             onKeyDown={(e) => e.key === "Enter" && handleCommand()}
-            className="bg-transparent border-2 border-green-500 outline-none text-green-300 font-press-start-2p px-2 py-1 ml-2 w-full text-sm lg:text-base"
+            className="bg-transparent border-2 border-green-500 outline-none text-green-500 font-press-start-2p px-2 py-1 ml-2 w-full text-sm lg:text-base"
             autoFocus
           />
         </div>

@@ -59,7 +59,7 @@ export const Timeline = ({ data }: { data: GitHubRepo[] }) => {
   let globalIndex = 0;
   return (
     <div
-      className="w-full font-sans px-4 sm:px-6 md:px-10 py-10 background-main"
+      className="w-full font-sans px-1 xs:px-4 sm:px-6 md:px-10 py-10 background-main"
       ref={containerRef}
     >
       <div className="max-w-7xl mx-auto">

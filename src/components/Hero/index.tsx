@@ -57,7 +57,7 @@ const Hero = () => {
         initial="hidden"
         animate="visible"
       >
-        <motion.button className="bg-amber-600 w-full px-2 lg:px-4 py-2 text-white font-semibold rounded-md group-hover:text-black duration-300">
+        <motion.button className="bg-amber-600 w-full px-1 xs:px-2 lg:px-4 py-2 text-white font-semibold rounded-md group-hover:text-black duration-300">
           <Link
             href={"https://www.linkedin.com/in/rizqi-sabilla-8b1a97264/"}
             target="_blank"

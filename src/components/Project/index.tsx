@@ -15,7 +15,7 @@ const Project = ({ repoData }: { repoData: GitHubRepo[] }) => {
     >
       <div className="stack-project-container">
         <motion.h1
-          className="text-gray-200 font-bold text-center relative z-10 text-nowrap my-5"
+          className="text-gray-200 font-bold text-center relative z-10 text-wrap md:text-nowrap my-5"
           style={{ fontSize: "clamp(2.5rem, 5vw, 5rem)" }}
           initial="hidden"
           whileInView="visible"

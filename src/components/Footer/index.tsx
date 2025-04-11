@@ -54,7 +54,7 @@ const Footer = () => {
 
   return (
     <section
-      className="footer-root relative min-h-[400px] px-14 overflow-hidden"
+      className="footer-root relative min-h-[400px] px-4 xs:px-8 md:px-10 lg:px-14 overflow-hidden"
       ref={footerRef}
     >
       <div className="footer-container my-8">
@@ -63,7 +63,7 @@ const Footer = () => {
             <Link href="/" as="/">
               <div className="flex items-center justify-center gap-1">
                 <motion.span
-                  className="text-5xl font-bold text-white"
+                  className=" text-2xl xs:text-3xl md:text-4xl lg:text-5xl font-bold text-white"
                   initial={{ opacity: 0, y: -40 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6 }}
@@ -72,7 +72,7 @@ const Footer = () => {
                   _Rizqi
                 </motion.span>
                 <motion.span
-                  className="text-5xl font-bold text-amber-600"
+                  className="text-2xl xs:text-3xl md:text-4xl lg:text-5xl font-bold text-amber-600"
                   initial={{ opacity: 0, y: 40 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.1 }}
@@ -308,7 +308,7 @@ const Footer = () => {
               </motion.p>
 
               <motion.form
-                className="flex gap-2"
+                className="flex flex-wrap xs:flex-nowrap gap-2"
                 initial={{ opacity: 0, x: 40 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.4, delay: 0.2 }}
@@ -392,11 +392,11 @@ const Footer = () => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.5, y: 50 }}
             transition={{ duration: 0.3 }}
-            className="fixed bottom-6 right-6 z-50"
+            className="fixed bottom-14 right-2 xs:bottom-6 xs:right-6 z-50"
           >
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="bg-gradient-to-br from-amber-500 to-yellow-400 hover:from-amber-600 hover:to-yellow-500 text-white p-3 rounded-full shadow-lg backdrop-blur-md bg-opacity-90 transition-transform duration-300 hover:scale-110 hover:rotate-[8deg]"
+              className="bg-gradient-to-br from-amber-500 to-yellow-400 hover:from-amber-600 hover:to-yellow-500 text-white p-2 xs:p-3 rounded-full shadow-lg backdrop-blur-md bg-opacity-90 transition-transform duration-300 hover:scale-110 hover:rotate-[8deg]"
               aria-label="Scroll to top"
             >
               <i className="fi fi-rr-arrow-small-up text-xl" />

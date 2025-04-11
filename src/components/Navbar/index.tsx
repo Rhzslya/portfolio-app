@@ -45,8 +45,10 @@ const Navbar = () => {
               as="/"
               className="flex items-center justify-center gap-1"
             >
-              <span className="text-4xl font-bold text-white">_Rizqi</span>
-              <span className="text-4xl font-bold text-amber-600">
+              <span className="text-2xl md:text-3xl lg:text-4xl font-bold text-white">
+                _Rizqi
+              </span>
+              <span className="text-2xl md:text-3xl lg:text-4xl font-bold text-amber-600">
                 Sabilla.
               </span>
             </Link>

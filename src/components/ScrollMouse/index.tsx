@@ -44,7 +44,7 @@ const ScrollMouse = () => {
             />
           </g>
         </svg>
-        <div className="p-2 max-[350px]:text-sm">
+        <div className="p-2 text-sm lg:text-base">
           <span>Scroll Down</span>
         </div>
         <div className="">

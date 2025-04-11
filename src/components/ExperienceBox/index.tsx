@@ -100,12 +100,12 @@ export default function ExperienceBox({
                 end={item.num}
                 duration={5}
                 delay={0.8}
-                className="text-5xl 2xl:text-6xl font-bold"
+                className="text-3xl md:text-5xl 2xl:text-6xl font-bold"
               />
               <p
                 className={`${
                   item.text.length < 15 ? "max-w-[100px]" : "max-w-[120px]"
-                } max-[662px]:text-center`}
+                } max-[662px]:text-center text-sm lg:text-base`}
               >
                 {item.text}
               </p>

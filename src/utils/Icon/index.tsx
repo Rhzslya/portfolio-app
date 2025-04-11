@@ -80,7 +80,6 @@ export const ArrowDownIcon = ({ size = 24, className = "" }) => {
 };
 
 export const LocationIcon = ({
-  size = 24,
   color = "currentColor",
   className = "",
   ...props
@@ -88,8 +87,6 @@ export const LocationIcon = ({
   return (
     <svg
       {...props}
-      width={size}
-      height={size}
       viewBox="0 0 64 64"
       fill={color}
       xmlns="http://www.w3.org/2000/svg"
@@ -100,18 +97,12 @@ export const LocationIcon = ({
   );
 };
 
-export const PhoneIcon = ({
-  size = 24,
-  color = "currentColor",
-  className = "",
-}) => {
+export const PhoneIcon = ({ color = "currentColor", className = "" }) => {
   return (
     <svg
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      width={size}
-      height={size}
       className={className}
     >
       <path
@@ -122,17 +113,11 @@ export const PhoneIcon = ({
   );
 };
 
-export const MailIcon = ({
-  size = 32,
-  color = "currentColor",
-  className = "",
-}) => {
+export const MailIcon = ({ color = "currentColor", className = "" }) => {
   return (
     <svg
       viewBox="0 0 512 512"
       xmlns="http://www.w3.org/2000/svg"
-      width={size}
-      height={size}
       className={className}
       fill={color}
     >

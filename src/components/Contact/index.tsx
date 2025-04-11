@@ -10,7 +10,7 @@ const Contact = () => {
     <section id="contact" className="contact-root mx-auto max-w-7xl">
       <div className="contact-container">
         <motion.h1
-          className="text-gray-300 font-bold text-center relative z-10 text-nowrap mb-8"
+          className="text-gray-300 font-bold text-center relative z-10 text-nowrap mb-4 md:mb-6 lg:mb-8"
           style={{ fontSize: "clamp(2.5rem, 5vw, 5rem)" }}
           initial="hidden"
           whileInView="visible"
@@ -32,8 +32,7 @@ const Contact = () => {
               <BackgroundGradient>
                 <PhoneIcon
                   color="#fff"
-                  size={60}
-                  className="background-main p-2 rounded-full"
+                  className="background-main p-2 rounded-full w-10 md:w-12 lg:w-14 h-10 md:h-12 lg:h-14"
                 />
               </BackgroundGradient>
 
@@ -60,8 +59,7 @@ const Contact = () => {
               <BackgroundGradient>
                 <MailIcon
                   color="#fff"
-                  size={60}
-                  className="background-main p-2 rounded-full"
+                  className="background-main p-2 rounded-full w-10 md:w-12 lg:w-14 h-10 md:h-12 lg:h-14"
                 />
               </BackgroundGradient>
               <div className="email">
@@ -86,8 +84,7 @@ const Contact = () => {
               <BackgroundGradient className="">
                 <LocationIcon
                   color="#fff"
-                  size={60}
-                  className="background-main p-2 rounded-full"
+                  className="background-main p-2 rounded-full w-10 md:w-12 lg:w-14 h-10 md:h-12 lg:h-14"
                 />
               </BackgroundGradient>
 

@@ -5,7 +5,7 @@ import { STACKS } from "@/utils/Stack";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { backgroundVariants, rotatePop } from "@/utils/FramerMotionStyle";
+import { backgroundVariants, slideInUp } from "@/utils/FramerMotionStyle";
 
 export const InfiniteMovingCards = ({
   direction = "left",
@@ -74,10 +74,10 @@ export const InfiniteMovingCards = ({
         "scroller relative z-20 py-3 md:py-4 lg:py-6 xl:py-8 max-w-7xl overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]",
         className
       )}
-      variants={rotatePop}
+      variants={slideInUp}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.4 }}
+      viewport={{ once: true, amount: 0 }}
     >
       <motion.div
         className="absolute h-full inset-0 bg-dot-white/[0.8] [mask-image:radial-gradient(ellipse_at_center,black_10%,transparent_80%)] pointer-events-none"
