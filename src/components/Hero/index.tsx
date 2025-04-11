@@ -6,6 +6,7 @@ import {
   slideInFromLeft,
 } from "@/utils/FramerMotionStyle";
 import { motion } from "framer-motion";
+import Link from "next/link";
 const Hero = () => {
   return (
     <div className="hero-box relative xl:col-start-2 row-start-2 xl:row-start-1  xl:col-span-2 lg:row-span-2  mx-auto max-w-[800px] overflow-hidden m-auto">
@@ -57,7 +58,12 @@ const Hero = () => {
         animate="visible"
       >
         <motion.button className="bg-amber-600 w-full px-2 lg:px-4 py-2 text-white font-semibold rounded-md group-hover:text-black duration-300">
-          <motion.a>Learn More!</motion.a>
+          <Link
+            href={"https://www.linkedin.com/in/rizqi-sabilla-8b1a97264/"}
+            target="_blank"
+          >
+            Learn More!
+          </Link>
         </motion.button>
       </motion.div>
     </div>

@@ -8,24 +8,10 @@ import RandomRunningDot from "../RandomRunningDot";
 import HamburgerMenu from "../HamburgerMenu";
 import { motion } from "framer-motion";
 import { ArrowDownIcon } from "@/utils/Icon";
+import { socialMedia } from "@/utils/SocialMedia";
 
 const Navbar = () => {
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
-
-  const socialMedia = [
-    {
-      name: "facebook",
-      url: "https://www.facebook.com/profile.php?id=100077692014108&locale=id_ID",
-    },
-    {
-      name: "instagram",
-      url: "https://www.instagram.com/your_username",
-    },
-    {
-      name: "linkedin",
-      url: "https://www.linkedin.com/in/your_username",
-    },
-  ];
 
   useEffect(() => {
     if (isBurgerOpen) {
@@ -42,6 +28,7 @@ const Navbar = () => {
   const handleBurgerClick = () => {
     setIsBurgerOpen((prev) => !prev);
   };
+
   return (
     <motion.header
       initial={{ y: -100, opacity: 0 }}
@@ -67,17 +54,23 @@ const Navbar = () => {
 
           <div className="sections_link ml-auto">
             <div className="hidden lg:flex gap-8">
-              {sectionsNav?.map((item, index) => {
-                const linkPath = `#${item}`;
+              {sectionsNav.map((item, index) => {
+                const handleScroll = (e: React.MouseEvent) => {
+                  e.preventDefault();
+                  const section = document.getElementById(item);
+                  if (section) {
+                    section.scrollIntoView({ behavior: "smooth" });
+                  }
+                };
+
                 return (
-                  <Link
-                    href={linkPath}
+                  <button
                     key={index}
+                    onClick={handleScroll}
                     className="relative group hover:text-white duration-300 text-base font-medium"
                   >
                     {capitalizeFirst(item)}
-                    <span className="absolute left-0 bottom-0 w-full h-[1px] bg-white scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
-                  </Link>
+                  </button>
                 );
               })}
             </div>
@@ -88,16 +81,22 @@ const Navbar = () => {
             }`}
           >
             <div className="flex flex-col gap-4 p-6">
-              {sectionsNav?.map((item, index) => {
-                const linkPath = `/${item}`;
+              {sectionsNav.map((item, index) => {
+                const handleScroll = (e: React.MouseEvent) => {
+                  e.preventDefault();
+                  const section = document.getElementById(item);
+                  if (section) {
+                    section.scrollIntoView({ behavior: "smooth" });
+                  }
+                };
                 return (
-                  <Link
-                    href={linkPath}
+                  <button
+                    onClick={handleScroll}
                     key={index}
-                    className="relative group hover:text-white duration-300 text-base font-medium"
+                    className="relative group hover:text-white duration-300 text-base font-medium ml-auto"
                   >
                     {capitalizeFirst(item)}
-                  </Link>
+                  </button>
                 );
               })}
             </div>
@@ -151,18 +150,22 @@ const Navbar = () => {
             ))}
           </div>
           <div className="box-resume relative hidden sm:flex justify-center items-center text-center mx-3">
-            <button className="group relative flex items-center justify-center">
+            <a
+              href="resume/rizqisabilla.pdf"
+              download
+              className="group relative flex items-center justify-center"
+            >
               <ArrowDownIcon
                 size={28}
                 className="text-white group-hover:text-gray-400 duration-300"
               />
               <span
                 className="absolute text-nowrap left-1/2 -translate-x-1/2 top-full mt-4 text-white text-sm font-semibold px-2 py-1 rounded-md 
-                     opacity-0 invisible group-hover:opacity-100 group-hover:visible duration-300"
+           opacity-0 invisible group-hover:opacity-100 group-hover:visible duration-300"
               >
                 Download CV
               </span>
-            </button>
+            </a>
           </div>
 
           {

@@ -9,7 +9,10 @@ import { GitHubRepo } from "@/utils/Type";
 
 const Project = ({ repoData }: { repoData: GitHubRepo[] }) => {
   return (
-    <section className="grid grid-cols-1  gap-8 grid-rows-[auto_1fr_auto]">
+    <section
+      id="project"
+      className="grid grid-cols-1  gap-8 grid-rows-[auto_1fr_auto]"
+    >
       <div className="stack-project-container">
         <motion.h1
           className="text-gray-200 font-bold text-center relative z-10 text-nowrap my-5"

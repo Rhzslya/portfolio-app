@@ -7,6 +7,7 @@ import { sectionsNav } from "@/utils/Sections";
 import { capitalizeFirst } from "@/utils/Capitalize";
 import { items } from "@/utils/ProjectList";
 import { AnimatePresence, motion } from "framer-motion";
+import { socialMedia } from "@/utils/SocialMedia";
 
 const Footer = () => {
   const [randomProjects, setRandomProjects] = useState<typeof items>([]);
@@ -20,21 +21,6 @@ const Footer = () => {
     "Innovate & Elevate",
     "Code Beyond Limits",
     "Dream. Code. Achieve.",
-  ];
-
-  const socialMedia = [
-    {
-      name: "facebook",
-      url: "https://www.facebook.com/profile.php?id=100077692014108&locale=id_ID",
-    },
-    {
-      name: "instagram",
-      url: "https://www.instagram.com/your_username",
-    },
-    {
-      name: "linkedin",
-      url: "https://www.linkedin.com/in/your_username",
-    },
   ];
 
   useEffect(() => {
@@ -129,8 +115,14 @@ const Footer = () => {
                 Quick Links
               </motion.h3>
 
-              {sectionsNav?.map((item, index) => {
-                const linkPath = `/${item}`;
+              {sectionsNav.map((item, index) => {
+                const handleScroll = (e: React.MouseEvent) => {
+                  e.preventDefault();
+                  const section = document.getElementById(item);
+                  if (section) {
+                    section.scrollIntoView({ behavior: "smooth" });
+                  }
+                };
                 return (
                   <motion.div
                     key={index}
@@ -140,12 +132,12 @@ const Footer = () => {
                     }}
                     transition={{ duration: 0.4 }}
                   >
-                    <Link
-                      href={linkPath}
+                    <button
+                      onClick={handleScroll}
                       className="hover:text-white duration-200"
                     >
                       {capitalizeFirst(item)}
-                    </Link>
+                    </button>
                   </motion.div>
                 );
               })}
@@ -340,7 +332,7 @@ const Footer = () => {
         <div className="border-t-[1px] border-gray-700 pt-6 mt-10">
           {/* Social Media Icons */}
           <motion.div
-            className="hidden sm:flex items-center justify-center gap-x-4 text-white text-[24px] mx-8"
+            className="flex items-center justify-center gap-x-4 text-white text-[24px] mx-8"
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
@@ -366,13 +358,13 @@ const Footer = () => {
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="relative group hover:text-amber-400 duration-300"
+                  className="relative group hover:text-amber-500 duration-300"
                 >
                   <i
                     className={`fi fi-brands-${social.name} flex items-center justify-center`}
                   ></i>
                   {/* Underline Hover Effect */}
-                  <span className="absolute bottom-[-4px] left-1/2 transform -translate-x-1/2 w-0 h-[2px] bg-amber-400 group-hover:w-4 transition-all duration-300"></span>
+                  <span className="absolute bottom-[-6px] left-0 transform -translate-x-1 w-0 h-[2px] bg-amber-500 group-hover:w-4 transition-all duration-300"></span>
                 </Link>
               </motion.div>
             ))}

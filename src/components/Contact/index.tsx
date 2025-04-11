@@ -7,7 +7,7 @@ import Map from "../LeafletMaps";
 
 const Contact = () => {
   return (
-    <section className="contact-root mx-auto max-w-7xl">
+    <section id="contact" className="contact-root mx-auto max-w-7xl">
       <div className="contact-container">
         <motion.h1
           className="text-gray-300 font-bold text-center relative z-10 text-nowrap mb-8"

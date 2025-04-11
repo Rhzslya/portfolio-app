@@ -3,6 +3,13 @@ import { motion } from "framer-motion";
 import { fadeIn, scrollVariants } from "@/utils/FramerMotionStyle";
 
 const ScrollMouse = () => {
+  const handleScrollToProject = () => {
+    const projectSection = document.getElementById("project");
+    if (projectSection) {
+      projectSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <motion.div
       initial="hidden"
@@ -11,6 +18,7 @@ const ScrollMouse = () => {
       className="xl:col-start-4 xl:row-start-3 lg:col-start-2 row-start-6 lg:row-start-5 flex justify-center items-center xl:mb-auto max-xl:m-auto"
     >
       <motion.button
+        onClick={handleScrollToProject}
         className="flex flex-col justify-center items-center"
         variants={scrollVariants}
         animate="animate"
