@@ -13,8 +13,6 @@ export async function connect() {
     // Connect to MongoDB using Mongoose
     await mongoose.connect(uri);
 
-    // console.log("MongoDB connected successfully");
-
     const connection = mongoose.connection;
 
     connection.on("error", (err) => {
