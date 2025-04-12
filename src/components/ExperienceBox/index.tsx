@@ -9,6 +9,7 @@ const startYear = 2023;
 
 export default function ExperienceBox({
   setRepoData,
+  setIsLoading,
 }: {
   setRepoData: (
     repos: {
@@ -27,12 +28,14 @@ export default function ExperienceBox({
       };
     }[]
   ) => void;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const [totalRepos, setTotalRepos] = useState<number>(0);
   const [totalCommits, setTotalCommits] = useState<number>(0);
 
   useEffect(() => {
     const fetchGitHubStats = async () => {
+      setIsLoading(true);
       try {
         const response = await fetch("/api/github");
         if (!response.ok) throw new Error("Failed to fetch GitHub data");
@@ -69,11 +72,13 @@ export default function ExperienceBox({
         setRepoData(repositories);
       } catch (error) {
         console.error("Error fetching GitHub data:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchGitHubStats();
-  }, [setRepoData]);
+  }, [setRepoData, setIsLoading]);
 
   const stats = [
     { num: new Date().getFullYear() - startYear, text: "Years of Experience" },

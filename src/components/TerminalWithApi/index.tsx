@@ -218,7 +218,6 @@ export default function TerminalWithApi() {
             }}
             onKeyDown={(e) => e.key === "Enter" && handleCommand()}
             className="bg-transparent border-2 border-green-500 outline-none text-green-500 font-press-start-2p px-2 py-1 ml-2 w-full text-sm lg:text-base"
-            autoFocus
           />
         </div>
 

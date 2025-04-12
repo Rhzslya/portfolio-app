@@ -2,12 +2,17 @@ import React from "react";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/utils/FramerMotionStyle";
 import { ScrollingTechStack } from "../InfiniteMovingCards";
-import { ColourfulText } from "../ui/colorful-text";
 import { BentoProject } from "../BentoProject";
 import { Timeline } from "../Timeline";
 import { GitHubRepo } from "@/utils/Type";
 
-const Project = ({ repoData }: { repoData: GitHubRepo[] }) => {
+const Project = ({
+  repoData,
+  isLoading,
+}: {
+  repoData: GitHubRepo[];
+  isLoading: boolean;
+}) => {
   return (
     <section
       id="project"
@@ -22,14 +27,14 @@ const Project = ({ repoData }: { repoData: GitHubRepo[] }) => {
           viewport={{ once: true, amount: 0.5 }} // bisa disesuaikan
           variants={fadeIn(0.6)}
         >
-          My <ColourfulText text="Tech & Projects" />
+          My Tech & Projects
         </motion.h1>
         <ScrollingTechStack />
         <BentoProject />
       </div>
 
       <div className="flex justify-center">
-        <Timeline repoData={repoData} />
+        <Timeline repoData={repoData} isLoading={isLoading} />
       </div>
     </section>
   );

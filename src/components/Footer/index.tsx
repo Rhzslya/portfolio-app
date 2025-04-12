@@ -24,6 +24,9 @@ const Footer = () => {
   ];
 
   useEffect(() => {
+    const target = footerRef.current;
+
+    if (!target) return;
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -36,13 +39,10 @@ const Footer = () => {
       }
     );
 
-    if (footerRef.current) {
-      observer.observe(footerRef.current);
-    }
+    observer.observe(target);
+
     return () => {
-      if (footerRef.current) {
-        observer.unobserve(footerRef.current);
-      }
+      observer.unobserve(target);
     };
   }, []);
 

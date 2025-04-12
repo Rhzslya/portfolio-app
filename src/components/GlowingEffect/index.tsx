@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 
 import { Search, Sparkles } from "lucide-react";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { popIn, textSwitcherVariants } from "@/utils/FramerMotionStyle";
 
 export function GlowingEffectDemo() {
@@ -38,12 +38,12 @@ const GridItem = ({}: GridItemProps) => {
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   // Fungsi untuk memulai atau mengatur ulang timer
-  const startTimer = () => {
-    if (intervalRef.current) clearInterval(intervalRef.current); // Bersihkan interval sebelumnya
+  const startTimer = useCallback(() => {
+    if (intervalRef.current) clearInterval(intervalRef.current);
     intervalRef.current = setInterval(() => {
       setIndex((prevIndex) => (prevIndex + 1) % words.length);
-    }, 10000); // 10 detik
-  };
+    }, 10000);
+  }, [words.length]);
 
   // Ganti kata saat tombol di klik dan reset timer
   const handleClick = () => {
@@ -56,7 +56,7 @@ const GridItem = ({}: GridItemProps) => {
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, []);
+  }, [startTimer]);
 
   return (
     <motion.div

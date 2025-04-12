@@ -5,7 +5,13 @@ import { fadeIn } from "@/utils/FramerMotionStyle";
 import { TimelineBox } from "../TimelineBox";
 import { GitHubRepo } from "@/utils/Type";
 
-export function Timeline({ repoData }: { repoData: GitHubRepo[] }) {
+export function Timeline({
+  repoData,
+  isLoading,
+}: {
+  repoData: GitHubRepo[];
+  isLoading: boolean;
+}) {
   return (
     <div className="w-full flex flex-col background-main items-center justify-center overflow-hidden rounded-md">
       <motion.h1
@@ -25,7 +31,7 @@ export function Timeline({ repoData }: { repoData: GitHubRepo[] }) {
         <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-orange-400 to-transparent h-[5px] w-1/4 blur-sm" />
         <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-orange-400 to-transparent h-px w-1/4" />
       </div>
-      <TimelineBox data={repoData} />
+      <TimelineBox data={repoData} isLoading={isLoading} />
     </div>
   );
 }

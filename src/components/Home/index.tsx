@@ -8,6 +8,7 @@ import ScrollMouse from "../ScrollMouse";
 
 const HeroPage = ({
   setRepoData,
+  setIsLoading,
 }: {
   setRepoData: (
     repos: {
@@ -26,6 +27,7 @@ const HeroPage = ({
       };
     }[]
   ) => void;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   return (
     <main
@@ -36,7 +38,7 @@ const HeroPage = ({
       <Hero />
       <TerminalWithApi />
       <ImageStack />
-      <ExperienceBox setRepoData={setRepoData} />
+      <ExperienceBox setRepoData={setRepoData} setIsLoading={setIsLoading} />
       <ScrollMouse />
     </main>
   );

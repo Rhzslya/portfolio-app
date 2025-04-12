@@ -31,7 +31,7 @@ const Map = () => {
     >
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       <Marker position={[-6.25652, 106.72318]} icon={customIcon}>
-        <Popup>Ini Lokasi Saya!</Popup>
+        <Popup>My Location!</Popup>
       </Marker>
     </MapContainer>
   );
