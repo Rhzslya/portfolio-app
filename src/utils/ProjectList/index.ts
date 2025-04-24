@@ -61,4 +61,11 @@ export const items = [
     link: "https://rhzslya.github.io/flugelnime/",
     image: "flugelnime",
   },
+  {
+    title: "FlugelVibe",
+    description: "Recomender Music for your Moods :3",
+    stack: ["typescript", "react", "tailwindcss", "nextjs", "next-auth"],
+    link: "https://flugelvibe.vercel.app",
+    image: "flugel-vibe",
+  },
 ];
