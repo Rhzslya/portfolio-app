@@ -68,4 +68,12 @@ export const items = [
     link: "https://flugelvibe.vercel.app",
     image: "flugel-vibe",
   },
+  {
+    title: "TacSkills",
+    description:
+      "A modern twist on classic Tic Tac Toe featuring powerful skills like Delete, Convert, and Sweep. Built with smooth animations and responsive design.",
+    stack: ["typescript", "react", "vite", "tailwindcss", "framer-motion"],
+    link: "https://tacskills.vercel.app",
+    image: "tacskills",
+  },
 ];
