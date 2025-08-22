@@ -102,7 +102,7 @@ export default function MiniTerminal() {
     responses[Math.floor(Math.random() * responses.length)];
 
   return (
-    <section className="col-start-1 row-start-2 row-span-2 ">
+    <section className="col-start-1 row-start-2 row-span-2 xl:row-span-1">
       <div className="p-4 border h-full border-gray-600 bg-black text-green-400 font-mono rounded-md">
         <p>Type &quot;help&quot; for available commands.</p>
         <div className="flex justify-center items-center">
