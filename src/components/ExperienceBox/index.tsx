@@ -26,7 +26,7 @@ export default function ExperienceBox({
         message: string;
         commitUrl: string;
       };
-    }[]
+    }[],
   ) => void;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
@@ -46,11 +46,10 @@ export default function ExperienceBox({
 
         const totalCommits = data.reduce(
           (sum: number, repo: GitHubRepo) => sum + (repo.totalCount || 0),
-          0
+          0,
         );
         setTotalCommits(totalCommits);
 
-        // Ambil nama & tanggal repo
         const repositories = data.map((repo: GitHubRepo) => {
           return {
             name: repo.name,
@@ -82,7 +81,7 @@ export default function ExperienceBox({
 
   const stats = [
     { num: new Date().getFullYear() - startYear, text: "Years of Experience" },
-    { num: totalRepos, text: "Projects Completed" },
+    { num: totalRepos, text: "Total Repositories" },
     { num: totalCommits, text: "Code Commits" },
   ];
 

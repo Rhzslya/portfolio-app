@@ -76,4 +76,22 @@ export const items = [
     link: "https://tacskills.vercel.app",
     image: "tacskills",
   },
+  {
+    title: "Sinari",
+    description:
+      "A full-stack store management and real-time service tracking app featuring RBAC, automated WhatsApp notifications, and dynamic PDF invoicing.",
+    stack: [
+      "typescript",
+      "react",
+      "hono",
+      "bun",
+      "mariadb",
+      "prisma",
+      "redis",
+      "tailwindcss",
+      "framer-motion",
+    ],
+    link: "https://sinari.my.id",
+    image: "sinari",
+  },
 ];

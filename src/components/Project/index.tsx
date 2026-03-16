@@ -24,7 +24,7 @@ const Project = ({
           style={{ fontSize: "clamp(2.5rem, 5vw, 5rem)" }}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.5 }} // bisa disesuaikan
+          viewport={{ once: true, amount: 0.5 }}
           variants={fadeIn(0.6)}
         >
           My Tech & Projects
