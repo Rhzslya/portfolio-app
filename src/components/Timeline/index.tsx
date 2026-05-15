@@ -19,7 +19,7 @@ export function Timeline({
         style={{ fontSize: "clamp(2.5rem, 5vw, 5rem)" }}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.5 }} // biar animasinya muncul pas 50% elemen masuk layar
+        viewport={{ once: true, amount: 0.5 }}
         variants={fadeIn(0.6)}
       >
         Timeline
