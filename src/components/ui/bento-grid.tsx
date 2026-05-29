@@ -2,49 +2,8 @@ import { cn } from "@/utils/lib/utils";
 import { GlowingEffect } from "./glowing-effect";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import {
-  SiTypescript,
-  SiJavascript,
-  SiNodemon,
-  SiNodedotjs,
-  SiMongodb,
-  SiNextdotjs,
-  SiReact,
-  SiTailwindcss,
-  SiEslint,
-  SiRedis,
-  SiJsonwebtokens,
-  SiMaildotru,
-  SiOpenjdk,
-  SiReactrouter,
-  SiFramer,
-  SiGithub,
-  SiVite,
-  SiFirebase,
-} from "react-icons/si";
-import React, { JSX } from "react";
-const stackIcons: Record<string, JSX.Element> = {
-  typescript: <SiTypescript className="text-blue-500" />,
-  javascript: <SiJavascript className="text-yellow-500" />,
-  nodemon: <SiNodemon className="text-green-500" />,
-  nodejs: <SiNodedotjs className="text-green-600" />,
-  mongodb: <SiMongodb className="text-green-700" />,
-  nextjs: <SiNextdotjs className="text-white" />,
-  react: <SiReact className="text-blue-400" />,
-  swr: <SiReact className="text-cyan-500" />,
-  tailwindcss: <SiTailwindcss className="text-teal-400" />,
-  eslint: <SiEslint className="text-purple-500" />,
-  redis: <SiRedis className="text-red-500" />,
-  jwt: <SiJsonwebtokens className="text-orange-500" />,
-  mongoose: <SiMongodb className="text-green-700" />,
-  nodemailer: <SiMaildotru className="text-red-500" />,
-  java: <SiOpenjdk className="text-red-500" />,
-  "react-router": <SiReactrouter className="text-red-600" />,
-  "framer-motion": <SiFramer className="text-pink-500" />,
-  "gh-pages": <SiGithub className="text-gray-700" />,
-  vite: <SiVite className="text-purple-500" />,
-  firebase: <SiFirebase className="text-orange-500" />,
-};
+import React from "react";
+import { stackIcons } from "@/utils/StackIcons";
 
 export const BentoGrid = ({
   className,
@@ -57,7 +16,7 @@ export const BentoGrid = ({
     <div
       className={cn(
         "grid md:auto-rows-[24rem] grid-cols-1 md:grid-cols-3 gap-4 max-w-7xl mx-auto ",
-        className
+        className,
       )}
     >
       {children}
@@ -89,7 +48,7 @@ export const BentoGridItem = ({
       target="_blank"
       className={cn(
         "relative row-span-1 rounded-xl group/bento group hover:shadow-xl transition duration-200 shadow-input p-4   border border-transparent justify-between flex flex-col space-y-4",
-        className
+        className,
       )}
     >
       <GlowingEffect disabled={false} glow={true} />
@@ -119,7 +78,7 @@ export const BentoGridItem = ({
         </motion.div>
 
         <motion.div
-          className="flex items-center gap-2 mt-2"
+          className="flex flex-wrap items-center gap-2 mt-3"
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
@@ -143,7 +102,13 @@ export const BentoGridItem = ({
                 }}
                 transition={{ duration: 0.4 }}
               >
-                {stackIcons[tech] || null}
+                {stackIcons[tech] ? (
+                  stackIcons[tech]
+                ) : (
+                  <span className="px-2 py-1 text-[10px] font-semibold bg-gray-800 text-gray-300 rounded-md border border-gray-700 capitalize">
+                    {tech}
+                  </span>
+                )}
               </motion.span>
             ))}
         </motion.div>

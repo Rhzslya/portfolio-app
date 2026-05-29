@@ -28,7 +28,7 @@ export async function GET() {
   if (!GITHUB_ACCESS_TOKEN) {
     return NextResponse.json(
       { message: "GitHub token is missing" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 
@@ -102,7 +102,7 @@ query {
     console.error("GitHub API Error:", error);
     return NextResponse.json(
       { message: "Internal Server Error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
