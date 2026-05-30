@@ -28,9 +28,14 @@ import {
   SiWhatsapp,
   SiReactquery,
   SiRadixui,
+  SiLeaflet,
+  SiTauri,
+  SiRust,
+  SiShadcnui,
+  SiSocketdotio,
 } from "react-icons/si";
-import { TbChartAreaLine } from "react-icons/tb";
-
+import { TbChartAreaLine, TbLayoutDashboard } from "react-icons/tb";
+import { MdAnimation, MdSmartToy } from "react-icons/md";
 export const stackIcons: Record<string, JSX.Element> = {
   typescript: <SiTypescript className="text-blue-500" />,
   javascript: <SiJavascript className="text-yellow-500" />,
@@ -63,4 +68,12 @@ export const stackIcons: Record<string, JSX.Element> = {
   "react-query": <SiReactquery className="text-red-500" />,
   "radix-ui": <SiRadixui className="text-white" />,
   recharts: <TbChartAreaLine className="text-blue-400" />,
+  leaflet: <SiLeaflet className="text-green-500" />,
+  lottie: <MdAnimation className="text-teal-400" />,
+  baileys: <MdSmartToy className="text-gray-300" />,
+  tauri: <SiTauri className="text-yellow-500" />,
+  rust: <SiRust className="text-orange-500" />,
+  shadcn: <SiShadcnui className="text-white" />,
+  "socket-io": <SiSocketdotio className="text-white" />,
+  flowbite: <TbLayoutDashboard className="text-blue-500" />,
 };
